@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView" android:layout_weight="1">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="@string/label.count"
+                        android:id="@+id/label.count" android:layout_weight="1" android:layout_gravity="center"
+                        android:gravity="center_vertical|center_horizontal"/>
+                <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"
+                        android:id="@+id/editCount" android:editable="true" android:inputType="number|numberSigned"
+                        android:layout_weight="0.5" android:layout_margin="5dip"/>
+            </LinearLayout>
+            <CheckBox
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label.email_address"
+                    android:id="@+id/checkbox.emails" android:layout_margin="5dip"/>
+            <CheckBox android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="@string/label.telephone_numbers" android:id="@+id/checkbox.phones"
+                      android:layout_margin="5dip"/>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="@string/save"
+                android:id="@+id/button" android:layout_weight="1"/>
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageButton"
+                android:src="@android:drawable/ic_menu_revert"/>
+    </LinearLayout>
+</LinearLayout>
+

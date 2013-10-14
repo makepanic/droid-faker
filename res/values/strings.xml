@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Droid Faker</string>
+    <string name="title.contact">Kontakte</string>
+
+    <string name="generate">Generieren</string>
+    <string name="save">Speichern</string>
+    <string name="cancel">Abbrechen</string>
+
+    <string name="zero">0</string>
+
+    <string name="button.contacts">Kontakte</string>
+    <string name="button.sms">SMS</string>
+    <string name="button.generate">Generieren</string>
+
+    <string name="headline.main">Daten generieren</string>
+    <string name="headline.contact">Kontakte</string>
+
+    <string name="label.count">Anzahl</string>
+    <string name="label.telephone_numbers">Telefonnummern</string>
+    <string name="label.email_address">E-Mail-Adressen</string>
+
+</resources>
