@@ -1,10 +1,9 @@
 package de.rndm.droidFaker.generators.contact;
 
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.ContentValues;
+import android.content.*;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.CommonDataKinds.Email;
@@ -12,8 +11,9 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.util.Log;
-import de.rndm.droidFaker.fixtures.Name;
+import de.rndm.droidFaker.fixtures.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -35,30 +35,102 @@ public class ContactGenerator implements DataGenerator{
         String firstName = Name.getName(random);
         String lastName = Name.getName(random);
 
-        String accountType = null;
-        String accountName = null;
+        // via http://matrix-examplecode.blogspot.de/2012/03/add-contact-details-in-android.html
+        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+        int rawContactInsertIndex = ops.size();
 
-        ContentValues values = new ContentValues();
-        values.put(RawContacts.ACCOUNT_TYPE, accountType);
-        values.put(RawContacts.ACCOUNT_NAME, accountName);
-        Uri rawContactUri = cr.insert(ContactsContract.RawContacts.CONTENT_URI, values);
-        long rawContactId = ContentUris.parseId(rawContactUri);
+        ops.add(ContentProviderOperation.newInsert(RawContacts.CONTENT_URI)
+            .withValue(RawContacts.ACCOUNT_TYPE, null)
+            .withValue(RawContacts.ACCOUNT_NAME, null).build());
 
-        values.clear();
-        values.put(Data.RAW_CONTACT_ID, rawContactId);
-        values.put(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE);
-        values.put(Phone.NUMBER, "0123456789");
-        values.put(Phone.TYPE, Phone.TYPE_CUSTOM);
-        values.put(Phone.LABEL, "free directory assistance");
-        values.put(StructuredName.DISPLAY_NAME, firstName + " " + lastName);
-        values.put(StructuredName.GIVEN_NAME, firstName);
-        values.put(StructuredName.FAMILY_NAME, lastName);
-        values.put(Email.DATA, firstName + "." + lastName + "@droid.faker");
-        values.put(Email.TYPE, Email.TYPE_HOME);
+        //Phone Number
+        ops.add(ContentProviderOperation
+            .newInsert(ContactsContract.Data.CONTENT_URI)
+            .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID,
+                    rawContactInsertIndex)
+            .withValue(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE)
+            .withValue(Phone.NUMBER, "9X-XXXXXXXXX")
+            .withValue(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE)
+            .withValue(Phone.TYPE, Phone.TYPE_HOME).build());
 
-        Log.i("ContactGenerator insert", "generated contact for " + firstName + " " + lastName);
+        //Display name/Contact name
+        ops.add(ContentProviderOperation
+            .newInsert(ContactsContract.Data.CONTENT_URI)
+            .withValueBackReference(Data.RAW_CONTACT_ID,
+                    rawContactInsertIndex)
+            .withValue(Data.MIMETYPE, StructuredName.CONTENT_ITEM_TYPE)
+            .withValue(StructuredName.DISPLAY_NAME, firstName + " " + lastName)
+            .build());
 
-        Uri dataUri = cr.insert(Data.CONTENT_URI, values);
+        //Email details
+        ops.add(ContentProviderOperation
+            .newInsert(ContactsContract.Data.CONTENT_URI)
+            .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID,
+                    rawContactInsertIndex)
+            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+            .withValue(ContactsContract.CommonDataKinds.Email.DATA, firstName + "." + lastName + "@droid.faker")
+            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+            .withValue(ContactsContract.CommonDataKinds.Email.TYPE, Email.TYPE_WORK).build());
+
+        //Postal Address
+        ops.add(ContentProviderOperation
+            .newInsert(ContactsContract.Data.CONTENT_URI)
+            .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID,
+                    rawContactInsertIndex)
+            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.POBOX, "Postbox")
+
+            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.STREET, Street.getName(random))
+
+            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, City.getName(random))
+
+            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.REGION, "region")
+
+            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.POSTCODE, Postcode.getOne(random))
+
+            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY, Country.getName(random))
+
+            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.TYPE, ContactsContract.CommonDataKinds.StructuredPostal.TYPE_OTHER)
+            .build());
+
+        //Organization details
+        ops.add(ContentProviderOperation
+                .newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(Data.RAW_CONTACT_ID,
+                        rawContactInsertIndex)
+                .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Organization.COMPANY, Company.getName(random))
+                .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Organization.TITLE, Title.getName(random))
+                .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Organization.TYPE, ContactsContract.CommonDataKinds.Organization.TYPE_WORK)
+                .build());
+
+        //IM details
+        ops.add(ContentProviderOperation
+                .newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(Data.RAW_CONTACT_ID,
+                        rawContactInsertIndex)
+                .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Im.DATA, Nickname.getName(random))
+                .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE )
+                .withValue(ContactsContract.CommonDataKinds.Im.DATA5, ContactsContract.CommonDataKinds.Im.TYPE_WORK)
+                .build());
+
+        try {
+            ContentProviderResult[] res = cr.applyBatch(
+                    ContactsContract.AUTHORITY, ops);
+        } catch (RemoteException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (OperationApplicationException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 
     @Override
