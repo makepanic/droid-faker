@@ -12,6 +12,7 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import de.rndm.droidFaker.fixtures.*;
 import de.rndm.droidFaker.fixtures.Number;
+import de.rndm.droidFaker.generators.DataGenerator;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,7 +24,7 @@ import java.util.Random;
  * Time: 14:58
  * To change this template use File | Settings | File Templates.
  */
-public class ContactGenerator implements DataGenerator{
+public class ContactGenerator implements DataGenerator {
 
 
     private ContentResolver cr;

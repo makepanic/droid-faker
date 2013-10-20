@@ -1,4 +1,4 @@
-package de.rndm.droidFaker.generators.contact;
+package de.rndm.droidFaker.generators;
 
 import java.util.Random;
 
