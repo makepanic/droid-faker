@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ViewAnimator;
+import android.widget.*;
 import de.rndm.droidFaker.generators.contact.ContactGenerator;
+import de.rndm.droidFaker.model.ContactSettings;
 
 import java.util.Date;
 import java.util.Random;
@@ -24,6 +22,7 @@ public class MainActivity extends Activity {
     private EditText seedText;
     private AppPreferences appPreferences;
     private ViewAnimator viewAnimator;
+    private TextView execTask;
 
     private long seed = 0;
 
@@ -45,6 +44,8 @@ public class MainActivity extends Activity {
         seedText.setText("" + seedDate.getTime());
 
         viewAnimator = (ViewAnimator) findViewById(R.id.viewAnimator);
+        execTask = (TextView) findViewById(R.id.execTask);
+
         final Animation inAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
         final Animation outAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
 
@@ -58,6 +59,7 @@ public class MainActivity extends Activity {
                 new AsyncTask<Void, Void, Void>(){
                     @Override
                     protected void onPreExecute() {
+                        execTask.setText("Lösche alle Kontakte.");
                         viewAnimator.showNext();
                     }
                     @Override
@@ -82,12 +84,13 @@ public class MainActivity extends Activity {
                 new AsyncTask<Void, Void, Void>(){
                     @Override
                     protected void onPreExecute() {
+                        execTask.setText("Erstelle " + appPreferences.getInteger(ContactSettings.PREF_COUNT) + " Kontakte.");
                         viewAnimator.showNext();
                     }
                     @Override
                     protected Void doInBackground(Void... voids) {
                         seed = Long.valueOf(seedText.getText().toString());
-                        cg.generate(new Random(seed), appPreferences.getInteger(ContactGenerator.PREF_COUNT, 100));
+                        cg.generate(new Random(seed), appPreferences.getInteger(ContactSettings.PREF_COUNT, 100));
                         return null;
                     }
                     @Override

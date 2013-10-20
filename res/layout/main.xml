@@ -89,7 +89,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/executing.task"
-                    android:id="@+id/textView" android:gravity="center_horizontal"/>
+                    android:id="@+id/execTask" android:gravity="center_horizontal"/>
         </LinearLayout>
     </ViewAnimator>
 </LinearLayout>

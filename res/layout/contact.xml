@@ -47,11 +47,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:text="@string/save"
-                android:id="@+id/button" android:layout_weight="1"/>
+                android:id="@+id/contactSettingsSubmit" android:layout_weight="1"/>
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:id="@+id/imageButton"
+                android:id="@+id/resetContactSettings"
                 android:src="@android:drawable/ic_menu_revert"/>
     </LinearLayout>
 </LinearLayout>

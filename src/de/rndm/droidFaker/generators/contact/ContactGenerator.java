@@ -25,7 +25,6 @@ import java.util.Random;
  */
 public class ContactGenerator implements DataGenerator{
 
-    public final static String PREF_COUNT = "contact.count";
 
     private ContentResolver cr;
 
