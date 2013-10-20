@@ -9,17 +9,19 @@ import java.util.Random;
  * Time: 21:02
  * To change this template use File | Settings | File Templates.
  */
-public class Postcode {
+public class Number {
 
-    private static final int POSTCODE_LENGTH = 5;
+    private static final int DEFAULT_LENGTH = 5;
 
     public static String getOne(Random random) {
-        String code = "";
+        return getOne(random, DEFAULT_LENGTH);
+    }
 
-        for (int i = 0; i < 5; i++) {
+    public static String getOne(Random random, int length) {
+        String code = "";
+        for (int i = 0; i < length; i++) {
             code += random.nextInt(10);
         }
-
         return code;
     }
 }

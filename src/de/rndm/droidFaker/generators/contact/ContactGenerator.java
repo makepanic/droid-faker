@@ -10,8 +10,8 @@ import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.util.Log;
 import de.rndm.droidFaker.fixtures.*;
+import de.rndm.droidFaker.fixtures.Number;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -49,7 +49,7 @@ public class ContactGenerator implements DataGenerator{
             .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID,
                     rawContactInsertIndex)
             .withValue(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE)
-            .withValue(Phone.NUMBER, "9X-XXXXXXXXX")
+            .withValue(Phone.NUMBER, Number.getOne(random, 12))
             .withValue(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE)
             .withValue(Phone.TYPE, Phone.TYPE_HOME).build());
 
@@ -77,8 +77,8 @@ public class ContactGenerator implements DataGenerator{
             .newInsert(ContactsContract.Data.CONTENT_URI)
             .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID,
                     rawContactInsertIndex)
-            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.POBOX, "Postbox")
+//            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+//            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.POBOX, "Postbox")
 
             .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
             .withValue(ContactsContract.CommonDataKinds.StructuredPostal.STREET, Street.getName(random))
@@ -86,11 +86,11 @@ public class ContactGenerator implements DataGenerator{
             .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
             .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, City.getName(random))
 
-            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.REGION, "region")
+//            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+//            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.REGION, "region")
 
             .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.POSTCODE, Postcode.getOne(random))
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.POSTCODE, Number.getOne(random))
 
             .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
             .withValue(ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY, Country.getName(random))
