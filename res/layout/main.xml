@@ -4,36 +4,93 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/headline.main"
-            android:id="@+id/textView" android:layout_margin="5dip"/>
-    <LinearLayout
-            android:orientation="horizontal"
+    <ViewAnimator
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-        <Button
+            android:layout_height="fill_parent"
+            android:id="@+id/viewAnimator">
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button.contacts"
-                android:id="@+id/buttonContacts" android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
-                android:layout_weight="1"/>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/buttonContactsSettings" android:background="@android:drawable/ic_menu_manage"
-                android:layout_gravity="center" android:layout_marginLeft="10dip" android:layout_marginRight="10dip"/>
-    </LinearLayout>
-    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
-                  android:layout_height="wrap_content" android:id="@+id/linearLayout">
-        <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-                android:text="@string/button.sms" android:id="@+id/button" android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp" android:layout_weight="1"/>
-        <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-                     android:id="@+id/imageButton" android:background="@android:drawable/ic_menu_manage"
-                     android:layout_gravity="center" android:layout_marginLeft="10dip"
-                     android:layout_marginRight="10dip"/>
-    </LinearLayout>
+                android:layout_height="fill_parent">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content" android:layout_height="fill_parent"
+                          android:text="@string/seed" android:id="@+id/textView1" android:layout_margin="5dip"
+                          android:layout_gravity="center" android:gravity="center_vertical"/>
+                <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:id="@+id/seed" android:numeric="integer" android:inputType="number|numberSigned"
+                        android:layout_gravity="center" android:layout_margin="5dip"/>
+            </LinearLayout>
+            <TableLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" android:baselineAligned="false" android:stretchColumns="0"
+                    android:background="@android:color/background_dark">
+                <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false" android:layout_gravity="center">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="@string/headline.contact"
+                            android:id="@+id/textView2" android:gravity="center_vertical"
+                            android:paddingLeft="10dip" android:paddingRight="10dip" android:layout_gravity="center"/>
+                    <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/buttonCreateContacts" android:background="@android:drawable/ic_menu_add"
+                            android:layout_gravity="center"/>
+                    <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                 android:id="@+id/buttonResetContacts" android:background="@android:drawable/ic_menu_delete"
+                                 android:layout_gravity="center"/>
+                    <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/buttonContactsSettings" android:background="@android:drawable/ic_menu_manage"
+                            android:layout_gravity="center"
+                            />
+                </TableRow>
+                <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+                    <TextView android:layout_width="0dp" android:layout_height="fill_parent"
+                              android:text="@string/button.sms" android:id="@+id/textView3"
+                              android:gravity="center_vertical" android:paddingLeft="10dip" android:paddingRight="10dip"
+                              android:layout_gravity="center"/>
+                    <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageButton2" android:background="@android:drawable/ic_menu_add"
+                            android:adjustViewBounds="false" android:layout_gravity="center"/>
+                    <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                 android:id="@+id/imageButton1" android:background="@android:drawable/ic_menu_delete"
+                                 android:adjustViewBounds="false" android:layout_gravity="center"/>
+                    <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                 android:id="@+id/imageButton" android:background="@android:drawable/ic_menu_manage"
+                                 android:layout_gravity="center"
+                            />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressBar" android:layout_gravity="center"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/executing.task"
+                    android:id="@+id/textView" android:gravity="center_horizontal"/>
+        </LinearLayout>
+    </ViewAnimator>
 </LinearLayout>
 

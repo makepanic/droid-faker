@@ -5,8 +5,13 @@
     <string name="title.contact">Kontakte</string>
 
     <string name="generate">Generieren</string>
+    <string name="create">Erstellen</string>
+    <string name="reset">Reset</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
+    <string name="seed">Seed</string>
+
+    <string name="executing.task">Vorgang wird ausgeführt</string>
 
     <string name="zero">0</string>
 
