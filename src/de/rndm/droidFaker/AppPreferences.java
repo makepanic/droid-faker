@@ -3,6 +3,7 @@ package de.rndm.droidFaker;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,7 +20,7 @@ public class AppPreferences {
 
     public AppPreferences(Context context)
     {
-        this.appSharedPrefs = context.getSharedPreferences(APP_SHARED_PREFS, Activity.MODE_PRIVATE);
+        this.appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         this.prefsEditor = appSharedPrefs.edit();
     }
 
@@ -49,7 +50,7 @@ public class AppPreferences {
     public int getInteger(String key, int defValue){
         int value = defValue;
         if(key != null && !key.equals("")){
-            value = appSharedPrefs.getInt(key, defValue);
+            value = Integer.valueOf(appSharedPrefs.getString(key, "" + defValue));
         }
         return value;
     }
@@ -65,7 +66,7 @@ public class AppPreferences {
     }
     public void set(String key, int value){
         if(key != null && !key.equals("")){
-            prefsEditor.putInt(key, value);
+            prefsEditor.putString(key, "" + value);
             prefsEditor.commit();
         }
     }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+            android:title="@string/contacts"
+            android:key="pref.contacts">
+        <EditTextPreference
+                android:key="contact.count"
+                android:summary="@string/pref.contact.summary.count"
+                android:inputType="number"
+                android:title="@string/contacts.count" />
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:title="@string/sms"
+            android:key="pref.sms">
+        <EditTextPreference
+                android:key="sms.count"
+                android:summary="@string/pref.contact.summary.count"
+                android:inputType="number"
+                android:title="@string/sms.count" />
+    </PreferenceCategory>
+</PreferenceScreen>

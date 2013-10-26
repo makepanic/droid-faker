@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@android:id/list"
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
@@ -26,56 +27,13 @@
                         android:id="@+id/seed" android:numeric="integer" android:inputType="number|numberSigned"
                         android:layout_gravity="center" android:layout_margin="5dip"/>
             </LinearLayout>
-            <TableLayout
+            <Button
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" android:baselineAligned="false" android:stretchColumns="0"
-                    android:background="@android:color/background_dark">
-                <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:baselineAligned="false" android:layout_gravity="center">
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/headline.contact"
-                            android:id="@+id/textView2" android:gravity="center_vertical"
-                            android:paddingLeft="10dip" android:paddingRight="10dip" android:layout_gravity="center"/>
-                    <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/buttonCreateContacts" android:background="@android:drawable/ic_menu_add"
-                            android:layout_gravity="center"/>
-                    <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                 android:id="@+id/buttonResetContacts" android:background="@android:drawable/ic_menu_delete"
-                                 android:layout_gravity="center"/>
-                    <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/buttonContactsSettings" android:background="@android:drawable/ic_menu_manage"
-                            android:layout_gravity="center"
-                            />
-                </TableRow>
-                <TableRow
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-                    <TextView android:layout_width="0dp" android:layout_height="fill_parent"
-                              android:text="@string/button.sms" android:id="@+id/textView3"
-                              android:gravity="center_vertical" android:paddingLeft="10dip" android:paddingRight="10dip"
-                              android:layout_gravity="center"/>
-                    <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/imageButton2" android:background="@android:drawable/ic_menu_add"
-                            android:adjustViewBounds="false" android:layout_gravity="center"/>
-                    <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                 android:id="@+id/imageButton1" android:background="@android:drawable/ic_menu_delete"
-                                 android:adjustViewBounds="false" android:layout_gravity="center"/>
-                    <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                 android:id="@+id/imageButton" android:background="@android:drawable/ic_menu_manage"
-                                 android:layout_gravity="center"
-                            />
-                </TableRow>
-            </TableLayout>
+                    android:layout_height="wrap_content"
+                    android:text="@string/create"
+                    android:id="@+id/buttonCreate" android:layout_column="0"/>
+            <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:text="@string/reset" android:id="@+id/buttonReset" android:layout_column="0"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="vertical"

@@ -2,22 +2,24 @@
 <resources>
 
     <string name="app_name">Droid Faker</string>
-    <string name="title.contact">Kontakte</string>
 
+    <string name="contacts">Kontakte</string>
+    <string name="contacts.count">Anzahl Kontakte</string>
     <string name="generate">Generieren</string>
     <string name="create">Erstellen</string>
     <string name="reset">Reset</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
     <string name="seed">Seed</string>
+    <string name="count">Anzahl</string>
+    <string name="settings">Einstellungen</string>
 
     <string name="executing.task">Vorgang wird ausgeführt</string>
 
     <string name="zero">0</string>
 
-    <string name="button.contacts">Kontakte</string>
-    <string name="button.sms">SMS</string>
-    <string name="button.generate">Generieren</string>
+    <string name="sms">SMS</string>
+    <string name="sms.count">Anzahl SMS</string>
 
     <string name="headline.main">Daten generieren</string>
     <string name="headline.contact">Kontakte</string>
@@ -25,5 +27,8 @@
     <string name="label.count">Anzahl</string>
     <string name="label.telephone_numbers">Telefonnummern</string>
     <string name="label.email_address">E-Mail-Adressen</string>
+
+    <string name="pref.contact.summary.count">Anzahl der zu erstellenden Kontakte</string>
+    <string name="pref.sms.summary.count">Anzahl der zu erstellenden SMSs</string>
 
 </resources>

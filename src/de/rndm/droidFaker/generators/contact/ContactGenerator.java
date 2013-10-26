@@ -10,6 +10,7 @@ import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.util.Log;
 import de.rndm.droidFaker.fixtures.*;
 import de.rndm.droidFaker.fixtures.Number;
 import de.rndm.droidFaker.generators.DataGenerator;
@@ -32,6 +33,7 @@ public class ContactGenerator implements DataGenerator {
     public ContactGenerator(ContentResolver cr) {
         this.cr = cr;
     }
+
     private void insert(Random random) {
         String firstName = Name.getName(random);
         String lastName = Name.getName(random);
@@ -136,6 +138,9 @@ public class ContactGenerator implements DataGenerator {
 
     @Override
     public void generate(Random random, int amount) {
+
+        Log.i("ContactGenerator", "generate " + amount);
+
         for (int i = 0; i < amount; i++) {
             insert(random);
         }

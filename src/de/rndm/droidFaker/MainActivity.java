@@ -2,23 +2,30 @@ package de.rndm.droidFaker;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
 import de.rndm.droidFaker.generators.contact.ContactGenerator;
+import de.rndm.droidFaker.generators.sms.SmsGenerator;
 import de.rndm.droidFaker.model.ContactSettings;
+import de.rndm.droidFaker.model.SmsSettings;
 
 import java.util.Date;
 import java.util.Random;
 
 public class MainActivity extends Activity {
 
-    private ImageButton buttonGenerateContact;
-    private ImageButton buttonResetContact;
-    private ImageButton buttonContactSettings;
+    private static final int RESULT_SETTINGS = 1;
+
+    private Button buttonGenerateData;
+    private Button buttonResetData;
     private EditText seedText;
     private AppPreferences appPreferences;
     private ViewAnimator viewAnimator;
@@ -27,6 +34,7 @@ public class MainActivity extends Activity {
     private long seed = 0;
 
     private ContactGenerator cg;
+    private SmsGenerator sg;
 
     /**
      * Called when the activity is first created.
@@ -38,6 +46,7 @@ public class MainActivity extends Activity {
         appPreferences = new AppPreferences(this);
 
         cg = new ContactGenerator(getContentResolver());
+        sg = new SmsGenerator(getContentResolver());
 
         Date seedDate = new Date();
         seedText = (EditText) findViewById(R.id.seed);
@@ -52,62 +61,77 @@ public class MainActivity extends Activity {
         viewAnimator.setInAnimation(inAnim);
         viewAnimator.setOutAnimation(outAnim);
 
-        buttonResetContact = (ImageButton) findViewById(R.id.buttonResetContacts);
-        buttonResetContact.setOnClickListener(new View.OnClickListener() {
+        buttonGenerateData = (Button) findViewById(R.id.buttonCreate);
+        buttonResetData = (Button) findViewById(R.id.buttonReset);
+
+        buttonGenerateData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new AsyncTask<Void, Void, Void>(){
                     @Override
                     protected void onPreExecute() {
-                        execTask.setText("Lösche alle Kontakte.");
+                        execTask.setText("Daten werden erstellt.");
                         viewAnimator.showNext();
                     }
                     @Override
                     protected Void doInBackground(Void... voids) {
                         seed = Long.valueOf(seedText.getText().toString());
+                        Random random = new Random(seed);
+                        cg.generate(random, appPreferences.getInteger(ContactSettings.PREF_COUNT, 100));
+                        sg.generate(random, appPreferences.getInteger(SmsSettings.PREF_COUNT, 100));
+                        return null;
+                    }
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        Toast.makeText(getApplicationContext(), "Daten erfolgreich erstellt",
+                                Toast.LENGTH_LONG).show();
+                        viewAnimator.showPrevious();
+                    }
+                }.execute();
+            }
+        });
+
+        buttonResetData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AsyncTask<Void, Void, Void>(){
+                    @Override
+                    protected void onPreExecute() {
+                        execTask.setText("Daten werden gelöscht.");
+                        viewAnimator.showNext();
+                    }
+                    @Override
+                    protected Void doInBackground(Void... voids) {
                         cg.reset();
+                        sg.reset();
                         return null;
                     }
                     @Override
                     protected void onPostExecute(Void aVoid) {
+                        Toast.makeText(getApplicationContext(), "Daten erfolgreich gelöscht",
+                                Toast.LENGTH_LONG).show();
                         viewAnimator.showPrevious();
                     }
                 }.execute();
             }
         });
+    }
 
-        buttonGenerateContact = (ImageButton) findViewById(R.id.buttonCreateContacts);
-        buttonGenerateContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                new AsyncTask<Void, Void, Void>(){
-                    @Override
-                    protected void onPreExecute() {
-                        execTask.setText("Erstelle " + appPreferences.getInteger(ContactSettings.PREF_COUNT) + " Kontakte.");
-                        viewAnimator.showNext();
-                    }
-                    @Override
-                    protected Void doInBackground(Void... voids) {
-                        seed = Long.valueOf(seedText.getText().toString());
-                        cg.generate(new Random(seed), appPreferences.getInteger(ContactSettings.PREF_COUNT, 100));
-                        return null;
-                    }
-                    @Override
-                    protected void onPostExecute(Void aVoid) {
-                        viewAnimator.showPrevious();
-                    }
-                }.execute();
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        return true;
+    }
 
-        buttonContactSettings = (ImageButton) findViewById(R.id.buttonContactsSettings);
-        buttonContactSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, ContactActivity.class);
-                startActivity(i);
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                Intent i = new Intent(this, SettingsActivity.class);
+                startActivityForResult(i, RESULT_SETTINGS);
+                break;
+        }
+        return true;
     }
 }

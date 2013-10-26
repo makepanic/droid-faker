@@ -7,6 +7,8 @@
     <!-- permissions -->
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
 
     <uses-sdk android:minSdkVersion="10"
             android:targetSdkVersion="13"/>
@@ -21,8 +23,11 @@
         </activity>
         <activity
                 android:name="ContactActivity"
-                android:label="@string/title.contact">
-
+                android:label="@string/contacts">
+        </activity>
+        <activity
+                android:name=".SettingsActivity"
+                android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
     </application>
 </manifest>
