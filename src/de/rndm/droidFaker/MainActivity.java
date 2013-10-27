@@ -2,18 +2,18 @@ package de.rndm.droidFaker;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
+import de.rndm.droidFaker.generators.calls.CallsGenerator;
 import de.rndm.droidFaker.generators.contact.ContactGenerator;
 import de.rndm.droidFaker.generators.sms.SmsGenerator;
+import de.rndm.droidFaker.model.CallsSettings;
 import de.rndm.droidFaker.model.ContactSettings;
 import de.rndm.droidFaker.model.SmsSettings;
 
@@ -33,8 +33,9 @@ public class MainActivity extends Activity {
 
     private long seed = 0;
 
-    private ContactGenerator cg;
-    private SmsGenerator sg;
+    private ContactGenerator contactGenerator;
+    private SmsGenerator smsGenerator;
+    private CallsGenerator callsGenerator;
 
     /**
      * Called when the activity is first created.
@@ -45,8 +46,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         appPreferences = new AppPreferences(this);
 
-        cg = new ContactGenerator(getContentResolver());
-        sg = new SmsGenerator(getContentResolver());
+        contactGenerator = new ContactGenerator(getContentResolver());
+        smsGenerator = new SmsGenerator(getContentResolver());
+        callsGenerator = new CallsGenerator(getContentResolver());
 
         Date seedDate = new Date();
         seedText = (EditText) findViewById(R.id.seed);
@@ -77,8 +79,9 @@ public class MainActivity extends Activity {
                     protected Void doInBackground(Void... voids) {
                         seed = Long.valueOf(seedText.getText().toString());
                         Random random = new Random(seed);
-                        cg.generate(random, appPreferences.getInteger(ContactSettings.PREF_COUNT, 100));
-                        sg.generate(random, appPreferences.getInteger(SmsSettings.PREF_COUNT, 100));
+                        contactGenerator.generate(random, appPreferences.getInteger(ContactSettings.PREF_COUNT, 100));
+                        smsGenerator.generate(random, appPreferences.getInteger(SmsSettings.PREF_COUNT, 100));
+                        callsGenerator.generate(random, appPreferences.getInteger(CallsSettings.PREF_COUNT, 100));
                         return null;
                     }
                     @Override
@@ -102,8 +105,9 @@ public class MainActivity extends Activity {
                     }
                     @Override
                     protected Void doInBackground(Void... voids) {
-                        cg.reset();
-                        sg.reset();
+                        contactGenerator.reset();
+                        smsGenerator.reset();
+                        callsGenerator.reset();
                         return null;
                     }
                     @Override

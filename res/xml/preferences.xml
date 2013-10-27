@@ -18,4 +18,13 @@
                 android:inputType="number"
                 android:title="@string/sms.count" />
     </PreferenceCategory>
+    <PreferenceCategory
+            android:title="@string/calls"
+            android:key="pref.calls">
+        <EditTextPreference
+                android:key="calls.count"
+                android:summary="@string/pref.calls.summary.count"
+                android:inputType="number"
+                android:title="@string/calls.count" />
+    </PreferenceCategory>
 </PreferenceScreen>

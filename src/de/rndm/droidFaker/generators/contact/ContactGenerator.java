@@ -27,7 +27,6 @@ import java.util.Random;
  */
 public class ContactGenerator implements DataGenerator {
 
-
     private ContentResolver cr;
 
     public ContactGenerator(ContentResolver cr) {
