@@ -8,6 +8,8 @@
 
     <string name="web.count">Anzahl Webseiten</string>
     <string name="bookmarks.count">Anzahl Bookmarks</string>
+    <string name="history.count">Anzahl Verlauf</string>
+    <string name="search.count">Anzahl Suchen</string>
     <string name="web">Web</string>
 
     <string name="contacts">Kontakte</string>
@@ -40,5 +42,7 @@
     <string name="pref.calls.summary.count">Anzahl der zu erstellenden Anrufe</string>
     <string name="pref.web.summary.count">Anzahl der zu besuchenden Webseiten</string>
     <string name="pref.bookmarks.summary.count">Anzahl der zu erstellenden Bookmarks</string>
+    <string name="pref.history.summary.count">Größe des zu erstellenden Verlaufes</string>
+    <string name="pref.search.summary.count">Anzahl der Suchen</string>
 
 </resources>

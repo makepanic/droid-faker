@@ -41,5 +41,15 @@
                 android:summary="@string/pref.bookmarks.summary.count"
                 android:inputType="number"
                 android:title="@string/bookmarks.count" />
+        <EditTextPreference
+                android:key="history.count"
+                android:summary="@string/pref.history.summary.count"
+                android:inputType="number"
+                android:title="@string/history.count" />
+        <EditTextPreference
+                android:key="search.count"
+                android:summary="@string/pref.search.summary.count"
+                android:inputType="number"
+                android:title="@string/search.count" />
     </PreferenceCategory>
 </PreferenceScreen>

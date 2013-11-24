@@ -15,6 +15,8 @@ import android.widget.*;
 import de.rndm.droidFaker.generators.bookmark.BookmarkGenerator;
 import de.rndm.droidFaker.generators.calls.CallsGenerator;
 import de.rndm.droidFaker.generators.contact.ContactGenerator;
+import de.rndm.droidFaker.generators.history.HistoryGenerator;
+import de.rndm.droidFaker.generators.search.SearchGenerator;
 import de.rndm.droidFaker.generators.sms.SmsGenerator;
 import de.rndm.droidFaker.generators.web.WebGenerator;
 import de.rndm.droidFaker.generators.wifi.WifiSettingsGenerator;
@@ -43,6 +45,8 @@ public class MainActivity extends Activity {
     private WifiSettingsGenerator wifiSettingsGenerator;
     private WebGenerator webGenerator;
     private BookmarkGenerator bookmarkGenerator;
+    private HistoryGenerator historyGenerator;
+    private SearchGenerator searchGenerator;
 
     /**
      * Called when the activity is first created.
@@ -68,6 +72,8 @@ public class MainActivity extends Activity {
         smsGenerator = new SmsGenerator(getContentResolver());
         callsGenerator = new CallsGenerator(getContentResolver());
         bookmarkGenerator = new BookmarkGenerator(getContentResolver());
+        historyGenerator = new HistoryGenerator(getContentResolver());
+        searchGenerator = new SearchGenerator(getContentResolver());
         wifiSettingsGenerator = new WifiSettingsGenerator(this);
 
         webGenerator = new WebGenerator(webView);
@@ -95,6 +101,8 @@ public class MainActivity extends Activity {
                         smsGenerator.generate(random, appPreferences.getInteger(SmsSettings.PREF_COUNT, 100));
                         callsGenerator.generate(random, appPreferences.getInteger(CallsSettings.PREF_COUNT, 100));
                         bookmarkGenerator.generate(random, appPreferences.getInteger(BookmarkSettings.PREF_COUNT, 10));
+                        historyGenerator.generate(random, appPreferences.getInteger(HistorySettings.PREF_COUNT, 10));
+                        searchGenerator.generate(random, appPreferences.getInteger(SearchSettings.PREF_COUNT, 10));
 //                        wifiSettingsGenerator.generate(random, appPreferences.getInteger(WifiSettings.PREF_COUNT, 2));
                         return random;
                     }
@@ -131,6 +139,8 @@ public class MainActivity extends Activity {
                         smsGenerator.reset();
                         callsGenerator.reset();
                         bookmarkGenerator.reset();
+                        historyGenerator.reset();
+                        searchGenerator.reset();
                         return null;
                     }
                     @Override

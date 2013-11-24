@@ -18,7 +18,7 @@ public class Text {
         int alphabetLength = alphabet.length();
         int max = random.nextInt(maxLength);
 
-        for(int i = 0; i < max; i++) {
+        for(int i = 1; i < max + 1; i++) {
             result += alphabet.charAt(random.nextInt(alphabetLength));
         }
 
