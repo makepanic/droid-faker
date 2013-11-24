@@ -7,7 +7,8 @@
     <string name="calls.count">Anzahl Anrufe</string>
 
     <string name="web.count">Anzahl Webseiten</string>
-    <string name="web">Webseiten</string>
+    <string name="bookmarks.count">Anzahl Bookmarks</string>
+    <string name="web">Web</string>
 
     <string name="contacts">Kontakte</string>
     <string name="contacts.count">Anzahl Kontakte</string>
@@ -38,5 +39,6 @@
     <string name="pref.sms.summary.count">Anzahl der zu erstellenden SMSs</string>
     <string name="pref.calls.summary.count">Anzahl der zu erstellenden Anrufe</string>
     <string name="pref.web.summary.count">Anzahl der zu besuchenden Webseiten</string>
+    <string name="pref.bookmarks.summary.count">Anzahl der zu erstellenden Bookmarks</string>
 
 </resources>

@@ -36,5 +36,10 @@
                 android:summary="@string/pref.web.summary.count"
                 android:inputType="number"
                 android:title="@string/web.count" />
+        <EditTextPreference
+                android:key="bookmarks.count"
+                android:summary="@string/pref.bookmarks.summary.count"
+                android:inputType="number"
+                android:title="@string/bookmarks.count" />
     </PreferenceCategory>
 </PreferenceScreen>
