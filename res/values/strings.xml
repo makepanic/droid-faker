@@ -5,6 +5,10 @@
 
     <string name="calls">Anrufe</string>
     <string name="calls.count">Anzahl Anrufe</string>
+
+    <string name="web.count">Anzahl Webseiten</string>
+    <string name="web">Webseiten</string>
+
     <string name="contacts">Kontakte</string>
     <string name="contacts.count">Anzahl Kontakte</string>
     <string name="generate">Generieren</string>
@@ -33,5 +37,6 @@
     <string name="pref.contact.summary.count">Anzahl der zu erstellenden Kontakte</string>
     <string name="pref.sms.summary.count">Anzahl der zu erstellenden SMSs</string>
     <string name="pref.calls.summary.count">Anzahl der zu erstellenden Anrufe</string>
+    <string name="pref.web.summary.count">Anzahl der zu besuchenden Webseiten</string>
 
 </resources>

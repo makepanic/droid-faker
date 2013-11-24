@@ -9,13 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.*;
 import de.rndm.droidFaker.generators.calls.CallsGenerator;
 import de.rndm.droidFaker.generators.contact.ContactGenerator;
 import de.rndm.droidFaker.generators.sms.SmsGenerator;
+import de.rndm.droidFaker.generators.web.WebGenerator;
 import de.rndm.droidFaker.model.CallsSettings;
 import de.rndm.droidFaker.model.ContactSettings;
 import de.rndm.droidFaker.model.SmsSettings;
+import de.rndm.droidFaker.model.WebSettings;
 
 import java.util.Date;
 import java.util.Random;
@@ -30,12 +34,14 @@ public class MainActivity extends Activity {
     private AppPreferences appPreferences;
     private ViewAnimator viewAnimator;
     private TextView execTask;
+    private WebView webView;
 
     private long seed = 0;
 
     private ContactGenerator contactGenerator;
     private SmsGenerator smsGenerator;
     private CallsGenerator callsGenerator;
+    private WebGenerator webGenerator;
 
     /**
      * Called when the activity is first created.
@@ -46,16 +52,22 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         appPreferences = new AppPreferences(this);
 
-        contactGenerator = new ContactGenerator(getContentResolver());
-        smsGenerator = new SmsGenerator(getContentResolver());
-        callsGenerator = new CallsGenerator(getContentResolver());
 
         Date seedDate = new Date();
         seedText = (EditText) findViewById(R.id.seed);
         seedText.setText("" + seedDate.getTime());
 
+        webView = (WebView) findViewById(R.id.webView);
         viewAnimator = (ViewAnimator) findViewById(R.id.viewAnimator);
         execTask = (TextView) findViewById(R.id.execTask);
+        buttonGenerateData = (Button) findViewById(R.id.buttonCreate);
+        buttonResetData = (Button) findViewById(R.id.buttonReset);
+
+        contactGenerator = new ContactGenerator(getContentResolver());
+        smsGenerator = new SmsGenerator(getContentResolver());
+        callsGenerator = new CallsGenerator(getContentResolver());
+
+        webGenerator = new WebGenerator(webView);
 
         final Animation inAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
         final Animation outAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
@@ -63,32 +75,37 @@ public class MainActivity extends Activity {
         viewAnimator.setInAnimation(inAnim);
         viewAnimator.setOutAnimation(outAnim);
 
-        buttonGenerateData = (Button) findViewById(R.id.buttonCreate);
-        buttonResetData = (Button) findViewById(R.id.buttonReset);
-
         buttonGenerateData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AsyncTask<Void, Void, Void>(){
+                new AsyncTask<Void, Void, Random>(){
                     @Override
                     protected void onPreExecute() {
                         execTask.setText("Daten werden erstellt.");
                         viewAnimator.showNext();
                     }
                     @Override
-                    protected Void doInBackground(Void... voids) {
+                    protected Random doInBackground(Void... voids) {
                         seed = Long.valueOf(seedText.getText().toString());
                         Random random = new Random(seed);
                         contactGenerator.generate(random, appPreferences.getInteger(ContactSettings.PREF_COUNT, 100));
                         smsGenerator.generate(random, appPreferences.getInteger(SmsSettings.PREF_COUNT, 100));
                         callsGenerator.generate(random, appPreferences.getInteger(CallsSettings.PREF_COUNT, 100));
-                        return null;
+                        return random;
                     }
                     @Override
-                    protected void onPostExecute(Void aVoid) {
-                        Toast.makeText(getApplicationContext(), "Daten erfolgreich erstellt",
-                                Toast.LENGTH_LONG).show();
-                        viewAnimator.showPrevious();
+                    protected void onPostExecute(Random random) {
+                        webGenerator.generate(random, appPreferences.getInteger(WebSettings.PREF_COUNT, 10), new Callback() {
+                            @Override
+                            public void callingBack(Object... params) {
+
+                                Toast.makeText(getApplicationContext(), "Daten erfolgreich erstellt",
+                                        Toast.LENGTH_LONG).show();
+                                viewAnimator.showPrevious();
+
+                            }
+                        });
+
                     }
                 }.execute();
             }

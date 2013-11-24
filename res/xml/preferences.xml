@@ -27,4 +27,14 @@
                 android:inputType="number"
                 android:title="@string/calls.count" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="@string/web"
+            android:key="pref.calls">
+        <EditTextPreference
+                android:key="web.count"
+                android:summary="@string/pref.web.summary.count"
+                android:inputType="number"
+                android:title="@string/web.count" />
+    </PreferenceCategory>
 </PreferenceScreen>
