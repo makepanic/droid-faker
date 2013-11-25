@@ -9,8 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.*;
 import de.rndm.droidFaker.generators.bookmark.BookmarkGenerator;
 import de.rndm.droidFaker.generators.calls.CallsGenerator;
@@ -35,7 +33,6 @@ public class MainActivity extends Activity {
     private AppPreferences appPreferences;
     private ViewAnimator viewAnimator;
     private TextView execTask;
-    private WebView webView;
 
     private long seed = 0;
 
@@ -62,7 +59,6 @@ public class MainActivity extends Activity {
         seedText = (EditText) findViewById(R.id.seed);
         seedText.setText("" + seedDate.getTime());
 
-        webView = (WebView) findViewById(R.id.webView);
         viewAnimator = (ViewAnimator) findViewById(R.id.viewAnimator);
         execTask = (TextView) findViewById(R.id.execTask);
         buttonGenerateData = (Button) findViewById(R.id.buttonCreate);
@@ -75,8 +71,7 @@ public class MainActivity extends Activity {
         historyGenerator = new HistoryGenerator(getContentResolver());
         searchGenerator = new SearchGenerator(getContentResolver());
         wifiSettingsGenerator = new WifiSettingsGenerator(this);
-
-        webGenerator = new WebGenerator(webView);
+        webGenerator = new WebGenerator(this);
 
         final Animation inAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
         final Animation outAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
@@ -103,22 +98,14 @@ public class MainActivity extends Activity {
                         bookmarkGenerator.generate(random, appPreferences.getInteger(BookmarkSettings.PREF_COUNT, 10));
                         historyGenerator.generate(random, appPreferences.getInteger(HistorySettings.PREF_COUNT, 10));
                         searchGenerator.generate(random, appPreferences.getInteger(SearchSettings.PREF_COUNT, 10));
-//                        wifiSettingsGenerator.generate(random, appPreferences.getInteger(WifiSettings.PREF_COUNT, 2));
+                        wifiSettingsGenerator.generate(random, appPreferences.getInteger(WifiSettings.PREF_COUNT, 2));
+                        webGenerator.generate(random, appPreferences.getInteger(WebGenerator.PREF_COUNT, 10));
                         return random;
                     }
                     @Override
-                    protected void onPostExecute(Random random) {
-                        webGenerator.generate(random, appPreferences.getInteger(WebSettings.PREF_COUNT, 10), new Callback() {
-                            @Override
-                            public void callingBack(Object... params) {
-
-                                Toast.makeText(getApplicationContext(), "Daten erfolgreich erstellt",
-                                        Toast.LENGTH_LONG).show();
-                                viewAnimator.showPrevious();
-
-                            }
-                        });
-
+                    protected void onPostExecute(final Random random) {
+                        Toast.makeText(getApplicationContext(), "Daten erfolgreich erstellt", Toast.LENGTH_LONG).show();
+                        viewAnimator.showPrevious();
                     }
                 }.execute();
             }

@@ -1,12 +1,17 @@
 package de.rndm.droidFaker.generators.web;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 import de.rndm.droidFaker.Callback;
 import de.rndm.droidFaker.fixtures.Url;
 import de.rndm.droidFaker.generators.AsyncGenerator;
+import de.rndm.droidFaker.generators.DataGenerator;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,62 +23,22 @@ import java.util.Random;
  * Time: 14:28
  * To change this template use File | Settings | File Templates.
  */
-public class WebGenerator implements AsyncGenerator {
-    WebView webView;
-    WebViewClient webViewClient;
+public class WebGenerator implements DataGenerator {
 
-    public WebGenerator(WebView webView) {
-        this.webView = webView;
-        this.webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+    public static final String PREF_COUNT = "web.count";
 
-        // enable js
-        webView.getSettings().setJavaScriptEnabled(true);
+    private Context context;
+
+    public WebGenerator(Context context) {
+        this.context = context;
     }
 
     @Override
-    public void generate(Random random, int amount, final Callback callback) {
-
-
-        // dirty hack to get a integer inside the webView callback
-        final int[] currentUrl = {0};
-        final ArrayList<String> urls = new ArrayList<String>();
-
-        webViewClient = new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return super.shouldOverrideUrlLoading(view, url);
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                Log.i("onPageFinished", url);
-
-                ++currentUrl[0];
-
-                if(currentUrl[0] < urls.size()) {
-
-                    // has more pages
-                    Log.i("next", urls.get(currentUrl[0]));
-                    view.loadUrl(urls.get(currentUrl[0]));
-                } else {
-
-                    // no more pages, call callback
-                    callback.callingBack();
-                }
-            }
-        };
-
-        webView.setWebViewClient(webViewClient);
-
-        for(int i = 0; i < amount; i++) {
-            urls.add(Url.getOne(random));
+    public void generate(Random random, int amount) {
+        for (int i = 0; i < amount; i++) {
+            Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(Url.getOne(random)));
+            context.startActivity(viewIntent);
         }
-
-        webView.loadUrl(urls.get(currentUrl[0]));
     }
 
     @Override
