@@ -8,8 +8,7 @@ import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.util.Log;
-import de.rndm.droidFaker.fixtures.Name;
-import de.rndm.droidFaker.fixtures.Text;
+import de.rndm.droidFaker.fixtures.*;
 import de.rndm.droidFaker.generators.DataGenerator;
 
 import java.util.Random;
@@ -31,10 +30,10 @@ public class WifiSettingsGenerator implements DataGenerator {
         this.ctx = ctx;
     }
 
-    public void createWepConfig() {
+    public void createWepConfig(Random random) {
         WifiManager wifi = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
         WifiConfiguration wc = new WifiConfiguration();
-        wc.SSID = "\"SSID_NAME\""; //IMP! This should be in Quotes!!
+        wc.SSID = "\"" + Text.getText(random, 15) + "\""; //IMP! This should be in Quotes!!
         wc.hiddenSSID = true;
         wc.status = WifiConfiguration.Status.DISABLED;
         wc.priority = 40;
@@ -48,17 +47,12 @@ public class WifiSettingsGenerator implements DataGenerator {
         wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
         wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
 
-        wc.wepKeys[0] = "\"aaabbb1234\""; //This is the WEP Password
+        wc.wepKeys[0] = "\"myPasswort" + de.rndm.droidFaker.fixtures.Number.getOne(random, 4) + "\""; //This is the WEP Password
         wc.wepTxKeyIndex = 0;
 
         WifiManager  wifiManag = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
-        boolean res1 = wifiManag.setWifiEnabled(true);
         int res = wifi.addNetwork(wc);
-        Log.d("WifiPreference", "add Network returned " + res );
         boolean es = wifi.saveConfiguration();
-        Log.d("WifiPreference", "saveConfiguration returned " + es );
-        boolean b = wifi.enableNetwork(res, true);
-        Log.d("WifiPreference", "enableNetwork returned " + b );
     }
 
     @Override
@@ -66,7 +60,7 @@ public class WifiSettingsGenerator implements DataGenerator {
         Log.i("SmsGenerator", "generate " + amount);
 
         for(int i = 0; i < amount; i++) {
-            createWepConfig();
+            createWepConfig(random);
         }
     }
 
