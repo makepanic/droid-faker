@@ -44,5 +44,6 @@
     <string name="pref.bookmarks.summary.count">Anzahl der zu erstellenden Bookmarks</string>
     <string name="pref.history.summary.count">Größe des zu erstellenden Verlaufes</string>
     <string name="pref.search.summary.count">Anzahl der Suchen</string>
+    <string name="open.config.file">Config Datei öffnen</string>
 
 </resources>

@@ -8,10 +8,12 @@ An android application to generate contact, message and more user related data.
 
 - [done] contacts
 - [done] sms
+- [done] call log
 - email
 - social network (fb, twitter, ...)
 - sync settings
-- settings (wlan usw)
-- fotos
+- [started] settings (wlan usw)
+- [todo] fotos
 - geodaten
-- browsercache, verlauf, suche, fav
+- [started] browsercache, verlauf, suche, fav
+- [done] configfile

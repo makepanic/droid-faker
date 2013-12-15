@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,15 +22,18 @@ import de.rndm.droidFaker.generators.web.WebGenerator;
 import de.rndm.droidFaker.generators.wifi.WifiSettingsGenerator;
 import de.rndm.droidFaker.model.*;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Random;
 
 public class MainActivity extends Activity {
 
+    private static final String CFG_FILE = "droid-faker.json";
     private static final int RESULT_SETTINGS = 1;
 
     private Button buttonGenerateData;
     private Button buttonResetData;
+    private Button buttonConfig;
     private EditText seedText;
     private AppPreferences appPreferences;
     private ViewAnimator viewAnimator;
@@ -57,12 +62,13 @@ public class MainActivity extends Activity {
 
         Date seedDate = new Date();
         seedText = (EditText) findViewById(R.id.seed);
-        seedText.setText("" + seedDate.getTime());
+        seedText.setText(appPreferences.getString("seed", "" + seedDate.getTime()));
 
         viewAnimator = (ViewAnimator) findViewById(R.id.viewAnimator);
         execTask = (TextView) findViewById(R.id.execTask);
         buttonGenerateData = (Button) findViewById(R.id.buttonCreate);
         buttonResetData = (Button) findViewById(R.id.buttonReset);
+        buttonConfig = (Button) findViewById(R.id.buttonConfigFile);
 
         contactGenerator = new ContactGenerator(getContentResolver());
         smsGenerator = new SmsGenerator(getContentResolver());
@@ -78,6 +84,33 @@ public class MainActivity extends Activity {
 
         viewAnimator.setInAnimation(inAnim);
         viewAnimator.setOutAnimation(outAnim);
+
+        buttonConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String extState = Environment.getExternalStorageState();
+                if(!extState.equals(Environment.MEDIA_MOUNTED)) {
+                    Toast.makeText(getApplicationContext(), "SDCard nicht gemounted", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    String cfgPath;
+                    File sd = Environment.getExternalStorageDirectory();
+                    cfgPath = sd.getAbsolutePath() + "/" + CFG_FILE;
+
+                    File cfg = new File(cfgPath);
+                    if (cfg.exists()) {
+
+                        Toast.makeText(getApplicationContext(), "loading config file from " + cfgPath, Toast.LENGTH_LONG).show();
+                        ConfigFile configFile = new ConfigFile(cfgPath);
+                        configFile.load();
+                        configFile.apply(appPreferences);
+                        seedText.setText(appPreferences.getString("seed"));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Keine Config file gefunden " + cfgPath, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
 
         buttonGenerateData.setOnClickListener(new View.OnClickListener() {
             @Override

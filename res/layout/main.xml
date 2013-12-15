@@ -34,6 +34,11 @@
                     android:id="@+id/buttonCreate" android:layout_column="0"/>
             <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
                     android:text="@string/reset" android:id="@+id/buttonReset" android:layout_column="0"/>
+            <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/open.config.file"
+                    android:id="@+id/buttonConfigFile" android:layout_gravity="center_horizontal"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="vertical"

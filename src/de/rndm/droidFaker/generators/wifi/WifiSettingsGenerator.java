@@ -50,7 +50,6 @@ public class WifiSettingsGenerator implements DataGenerator {
         wc.wepKeys[0] = "\"myPasswort" + de.rndm.droidFaker.fixtures.Number.getOne(random, 4) + "\""; //This is the WEP Password
         wc.wepTxKeyIndex = 0;
 
-        WifiManager  wifiManag = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
         int res = wifi.addNetwork(wc);
         boolean es = wifi.saveConfiguration();
     }

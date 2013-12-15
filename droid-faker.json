@@ -1,0 +1,11 @@
+{
+    "seed": "droid-faker",
+    "contacts": 10,
+    "sms": 10,
+    "calls": 10,
+    "websites": 10,
+    "bookmarks": 10,
+    "history": 10,
+    "search": 10,
+    "wifi": 2
+}
