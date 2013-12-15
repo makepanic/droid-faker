@@ -35,7 +35,7 @@ public class ConfigFile {
         }
     }
 
-    public void apply(AppPreferences appPreferences){
+    public void applyConfig(AppPreferences appPreferences){
         Log.i("cfg.apply", this.cfg.toString());
         appPreferences.set(ContactSettings.PREF_COUNT, cfg.getContacts());
         appPreferences.set(SmsSettings.PREF_COUNT, cfg.getSms());

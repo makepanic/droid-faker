@@ -1,5 +1,5 @@
 {
-    "seed": "droid-faker",
+    "seed": 9001,
     "contacts": 10,
     "sms": 10,
     "calls": 10,

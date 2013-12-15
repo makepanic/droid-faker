@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -103,8 +102,8 @@ public class MainActivity extends Activity {
                         Toast.makeText(getApplicationContext(), "loading config file from " + cfgPath, Toast.LENGTH_LONG).show();
                         ConfigFile configFile = new ConfigFile(cfgPath);
                         configFile.load();
-                        configFile.apply(appPreferences);
-                        seedText.setText(appPreferences.getString("seed"));
+                        configFile.applyConfig(appPreferences);
+                        seedText.setText("" + appPreferences.getInteger("seed"));
                     } else {
                         Toast.makeText(getApplicationContext(), "Keine Config file gefunden " + cfgPath, Toast.LENGTH_LONG).show();
                     }

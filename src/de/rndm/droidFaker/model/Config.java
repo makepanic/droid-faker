@@ -1,7 +1,7 @@
 package de.rndm.droidFaker.model;
 
 public class Config {
-    private String seed;
+    private int seed;
     private int contacts;
     private int sms;
     private int calls;
@@ -42,11 +42,11 @@ public class Config {
         this.calls = calls;
     }
 
-    public String getSeed() {
+    public int getSeed() {
         return seed;
     }
 
-    public void setSeed(String seed) {
+    public void setSeed(int seed) {
         this.seed = seed;
     }
 
