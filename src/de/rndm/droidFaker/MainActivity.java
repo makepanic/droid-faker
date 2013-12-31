@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,12 +23,12 @@ import de.rndm.droidFaker.generators.wifi.WifiSettingsGenerator;
 import de.rndm.droidFaker.model.*;
 
 import java.io.File;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 public class MainActivity extends Activity {
 
     private static final String CFG_FILE = "droid-faker.json";
+    private static final String CFG_DIR = "droid-faker";
     private static final int RESULT_SETTINGS = 1;
 
     private Button buttonGenerateData;
@@ -37,6 +38,7 @@ public class MainActivity extends Activity {
     private AppPreferences appPreferences;
     private ViewAnimator viewAnimator;
     private TextView execTask;
+    private Spinner scenarioSpinner;
 
     private long seed = 0;
 
@@ -68,6 +70,46 @@ public class MainActivity extends Activity {
         buttonGenerateData = (Button) findViewById(R.id.buttonCreate);
         buttonResetData = (Button) findViewById(R.id.buttonReset);
         buttonConfig = (Button) findViewById(R.id.buttonConfigFile);
+        scenarioSpinner = (Spinner) findViewById(R.id.scenarioSpinner);
+
+        String extState = Environment.getExternalStorageState();
+        if(!extState.equals(Environment.MEDIA_MOUNTED)) {
+            Toast.makeText(getApplicationContext(), "SDCard nicht gemounted", Toast.LENGTH_LONG).show();
+        }
+        else {
+            final String cfgPath;
+            File sd = Environment.getExternalStorageDirectory();
+            cfgPath = sd.getAbsolutePath() + "/" + CFG_DIR + "/";
+
+            File cfg = new File(cfgPath);
+
+            if (cfg.exists()) {
+                final List<String> list = Arrays.asList(cfg.list());
+
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                scenarioSpinner.setAdapter(dataAdapter);
+                scenarioSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        String currentFilePath = cfgPath + list.get(i);
+                        Log.i("itemSelect", "selected " + i);
+                        ConfigFile configFile = new ConfigFile(currentFilePath));
+                        configFile.load();
+                        configFile.applyConfig(appPreferences);
+                        seedText.setText("" + appPreferences.getInteger("seed"));
+                        Toast.makeText(getApplicationContext(), "loading config file from " + currentFilePath, Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+            } else {
+                Toast.makeText(getApplicationContext(), "Keine Config file gefunden " + cfgPath, Toast.LENGTH_LONG).show();
+            }
+        }
 
         contactGenerator = new ContactGenerator(getContentResolver());
         smsGenerator = new SmsGenerator(getContentResolver());
@@ -83,33 +125,6 @@ public class MainActivity extends Activity {
 
         viewAnimator.setInAnimation(inAnim);
         viewAnimator.setOutAnimation(outAnim);
-
-        buttonConfig.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String extState = Environment.getExternalStorageState();
-                if(!extState.equals(Environment.MEDIA_MOUNTED)) {
-                    Toast.makeText(getApplicationContext(), "SDCard nicht gemounted", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    String cfgPath;
-                    File sd = Environment.getExternalStorageDirectory();
-                    cfgPath = sd.getAbsolutePath() + "/" + CFG_FILE;
-
-                    File cfg = new File(cfgPath);
-                    if (cfg.exists()) {
-
-                        Toast.makeText(getApplicationContext(), "loading config file from " + cfgPath, Toast.LENGTH_LONG).show();
-                        ConfigFile configFile = new ConfigFile(cfgPath);
-                        configFile.load();
-                        configFile.applyConfig(appPreferences);
-                        seedText.setText("" + appPreferences.getInteger("seed"));
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Keine Config file gefunden " + cfgPath, Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        });
 
         buttonGenerateData.setOnClickListener(new View.OnClickListener() {
             @Override

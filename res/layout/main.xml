@@ -27,6 +27,11 @@
                         android:id="@+id/seed" android:numeric="integer" android:inputType="number|numberSigned"
                         android:layout_gravity="center" android:layout_margin="5dip"/>
             </LinearLayout>
+            <Spinner
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/scenarioSpinner" android:spinnerMode="dropdown"
+                    />
             <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -38,7 +43,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/open.config.file"
-                    android:id="@+id/buttonConfigFile" android:layout_gravity="center_horizontal"/>
+                    android:id="@+id/buttonConfigFile" android:layout_gravity="center_horizontal"
+                    android:visibility="invisible"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="vertical"
