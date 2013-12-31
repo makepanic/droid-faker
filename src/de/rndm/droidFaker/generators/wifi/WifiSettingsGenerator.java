@@ -8,7 +8,10 @@ import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.util.Log;
+import de.rndm.droidFaker.FixtureSingleton;
+import de.rndm.droidFaker.FixtureType;
 import de.rndm.droidFaker.fixtures.*;
+import de.rndm.droidFaker.fixtures.Number;
 import de.rndm.droidFaker.generators.DataGenerator;
 
 import java.util.Random;
@@ -31,9 +34,11 @@ public class WifiSettingsGenerator implements DataGenerator {
     }
 
     public void createWepConfig(Random random) {
+        Fixture ssidFixture = FixtureSingleton.getInstance().getFixture(FixtureType.SSID);
+
         WifiManager wifi = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
         WifiConfiguration wc = new WifiConfiguration();
-        wc.SSID = "\"" + Text.getText(random, 15) + "\""; //IMP! This should be in Quotes!!
+        wc.SSID = "\"" + ssidFixture.getString(random) + "\""; //IMP! This should be in Quotes!!
         wc.hiddenSSID = true;
         wc.status = WifiConfiguration.Status.DISABLED;
         wc.priority = 40;
@@ -47,7 +52,7 @@ public class WifiSettingsGenerator implements DataGenerator {
         wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
         wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
 
-        wc.wepKeys[0] = "\"myPasswort" + de.rndm.droidFaker.fixtures.Number.getOne(random, 4) + "\""; //This is the WEP Password
+        wc.wepKeys[0] = "\"myPasswort" + Number.getOne(random, 10) + "\""; //This is the WEP Password
         wc.wepTxKeyIndex = 0;
 
         int res = wifi.addNetwork(wc);

@@ -9,7 +9,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 import de.rndm.droidFaker.Callback;
-import de.rndm.droidFaker.fixtures.Url;
+import de.rndm.droidFaker.FixtureSingleton;
+import de.rndm.droidFaker.FixtureType;
+import de.rndm.droidFaker.fixtures.Fixture;
 import de.rndm.droidFaker.generators.AsyncGenerator;
 import de.rndm.droidFaker.generators.DataGenerator;
 
@@ -35,8 +37,10 @@ public class WebGenerator implements DataGenerator {
 
     @Override
     public void generate(Random random, int amount) {
+        Fixture urlFixture = FixtureSingleton.getInstance().getFixture(FixtureType.URL);
+
         for (int i = 0; i < amount; i++) {
-            Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(Url.getOne(random)));
+            Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(urlFixture.getString(random)));
             context.startActivity(viewIntent);
         }
     }

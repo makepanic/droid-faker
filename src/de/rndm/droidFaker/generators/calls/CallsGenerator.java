@@ -4,7 +4,9 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.provider.CallLog;
 import android.util.Log;
-import de.rndm.droidFaker.fixtures.Name;
+import de.rndm.droidFaker.FixtureSingleton;
+import de.rndm.droidFaker.FixtureType;
+import de.rndm.droidFaker.fixtures.Fixture;
 import de.rndm.droidFaker.fixtures.Number;
 import de.rndm.droidFaker.fixtures.Text;
 import de.rndm.droidFaker.generators.DataGenerator;
@@ -28,6 +30,8 @@ public class CallsGenerator implements DataGenerator {
     }
 
     private void insert(Random random){
+        Fixture fixture = FixtureSingleton.getInstance().getFixture(FixtureType.NAME);
+
         //To change body of implemented methods use File | Settings | File Templates.
         ContentValues values = new ContentValues();
         values.put(CallLog.Calls.NUMBER, Number.getOne(random, 10));
@@ -35,7 +39,7 @@ public class CallsGenerator implements DataGenerator {
         values.put(CallLog.Calls.DURATION, Long.valueOf(Number.getOne(random, 3)));
         values.put(CallLog.Calls.TYPE, CallLog.Calls.OUTGOING_TYPE);
         values.put(CallLog.Calls.NEW, 1);
-        values.put(CallLog.Calls.CACHED_NAME, Name.getName(random));
+        values.put(CallLog.Calls.CACHED_NAME, fixture.getString(random));
         values.put(CallLog.Calls.CACHED_NUMBER_TYPE, 0);
         values.put(CallLog.Calls.CACHED_NUMBER_LABEL, Text.getText(random, 10));
         cr.insert(CallLog.Calls.CONTENT_URI, values);

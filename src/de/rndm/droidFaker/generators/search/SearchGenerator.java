@@ -3,7 +3,6 @@ package de.rndm.droidFaker.generators.search;
 import android.content.ContentResolver;
 import android.provider.Browser;
 import de.rndm.droidFaker.fixtures.Text;
-import de.rndm.droidFaker.fixtures.Url;
 import de.rndm.droidFaker.generators.DataGenerator;
 
 import java.util.Random;

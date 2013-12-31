@@ -11,9 +11,12 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.util.Log;
+import de.rndm.droidFaker.FixtureSingleton;
+import de.rndm.droidFaker.FixtureType;
 import de.rndm.droidFaker.fixtures.*;
 import de.rndm.droidFaker.fixtures.Number;
 import de.rndm.droidFaker.generators.DataGenerator;
+import de.rndm.droidFaker.model.FixturesHolder;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,8 +37,16 @@ public class ContactGenerator implements DataGenerator {
     }
 
     private void insert(Random random) {
-        String firstName = Name.getName(random);
-        String lastName = Name.getName(random);
+        FixturesHolder fixturesHolder = FixtureSingleton.getInstance();
+        Fixture nameFixture = fixturesHolder.getFixture(FixtureType.NAME);
+        Fixture streetFixture = fixturesHolder.getFixture(FixtureType.STREET);
+        Fixture countryFixture = fixturesHolder.getFixture(FixtureType.COUNTRY);
+        Fixture companyFixture = fixturesHolder.getFixture(FixtureType.COMPANY);
+        Fixture titleFixture = fixturesHolder.getFixture(FixtureType.TITLE);
+        Fixture nicknameFixture = fixturesHolder.getFixture(FixtureType.NICKNAME);
+
+        String firstName = nameFixture.getString(random);
+        String lastName = nameFixture.getString(random);
 
         // via http://matrix-examplecode.blogspot.de/2012/03/add-contact-details-in-android.html
         ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
@@ -83,10 +94,10 @@ public class ContactGenerator implements DataGenerator {
 //            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.POBOX, "Postbox")
 
             .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.STREET, Street.getName(random))
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.STREET, streetFixture.getString(random))
 
             .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, City.getName(random))
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, FixtureSingleton.getInstance().getFixture(FixtureType.CITY).getString(random))
 
 //            .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
 //            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.REGION, "region")
@@ -95,7 +106,7 @@ public class ContactGenerator implements DataGenerator {
             .withValue(ContactsContract.CommonDataKinds.StructuredPostal.POSTCODE, Number.getOne(random))
 
             .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY, Country.getName(random))
+            .withValue(ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY, countryFixture.getString(random))
 
             .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
             .withValue(ContactsContract.CommonDataKinds.StructuredPostal.TYPE, ContactsContract.CommonDataKinds.StructuredPostal.TYPE_OTHER)
@@ -107,9 +118,9 @@ public class ContactGenerator implements DataGenerator {
                 .withValueBackReference(Data.RAW_CONTACT_ID,
                         rawContactInsertIndex)
                 .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Organization.COMPANY, Company.getName(random))
+                .withValue(ContactsContract.CommonDataKinds.Organization.COMPANY, companyFixture.getString(random))
                 .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Organization.TITLE, Title.getName(random))
+                .withValue(ContactsContract.CommonDataKinds.Organization.TITLE, titleFixture.getString(random))
                 .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE)
                 .withValue(ContactsContract.CommonDataKinds.Organization.TYPE, ContactsContract.CommonDataKinds.Organization.TYPE_WORK)
                 .build());
@@ -120,8 +131,8 @@ public class ContactGenerator implements DataGenerator {
                 .withValueBackReference(Data.RAW_CONTACT_ID,
                         rawContactInsertIndex)
                 .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Im.DATA, Nickname.getName(random))
-                .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE )
+                .withValue(ContactsContract.CommonDataKinds.Im.DATA, nicknameFixture.getString(random))
+                .withValue(Data.MIMETYPE, ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE)
                 .withValue(ContactsContract.CommonDataKinds.Im.DATA5, ContactsContract.CommonDataKinds.Im.TYPE_WORK)
                 .build());
 

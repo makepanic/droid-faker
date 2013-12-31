@@ -1,6 +1,9 @@
 package de.rndm.droidFaker.model;
 
+import de.rndm.droidFaker.fixtures.*;
+
 public class Config {
+    private Fixtures fixtures;
     private int seed;
     private int contacts;
     private int sms;
@@ -10,11 +13,13 @@ public class Config {
     private int history;
     private int search;
     private int wifi;
+    private FixturesHolder fixturesHolder;
 
     @Override
     public String toString() {
         return "Config{" +
-                "seed='" + seed + '\'' +
+                "fixtures=" + fixtures +
+                ", seed=" + seed +
                 ", contacts=" + contacts +
                 ", sms=" + sms +
                 ", calls=" + calls +
@@ -24,6 +29,32 @@ public class Config {
                 ", search=" + search +
                 ", wifi=" + wifi +
                 '}';
+    }
+
+    public FixturesHolder buildFixturesHolder(){
+        if (fixturesHolder == null){
+            fixturesHolder = new FixturesHolder(
+                    new Fixture(fixtures.getCity()),
+                    new Fixture(fixtures.getCompany()),
+                    new Fixture(fixtures.getCountry()),
+                    new Fixture(fixtures.getName()),
+                    new Fixture(fixtures.getNickname()),
+                    new Fixture(fixtures.getStreet()),
+                    new Fixture(fixtures.getTitle()),
+                    new Fixture(fixtures.getUrl()),
+                    new Fixture(fixtures.getSsid())
+            );
+        }
+
+        return fixturesHolder;
+    }
+
+    public Fixtures getFixtures() {
+        return fixtures;
+    }
+
+    public void setFixtures(Fixtures fixtures) {
+        this.fixtures = fixtures;
     }
 
     public int getWifi() {

@@ -1,0 +1,40 @@
+{
+    "seed": 9001,
+    "fixtures": {
+        "city": [
+            "Berlin"
+        ],
+        "company": [
+            "Company"
+        ],
+        "country": [
+            "Germany"
+        ],
+        "name": [
+            "Foo"
+        ],
+        "nickname": [
+            "foo"
+        ],
+        "street": [
+            "Straße der Einheit"
+        ],
+        "title": [
+            "Herr"
+        ],
+        "url": [
+            "www.google.com"
+        ],
+        "ssid": [
+            "company-wifi-open"
+        ]
+    },
+    "contacts": 10,
+    "sms": 0,
+    "calls": 0,
+    "websites": 0,
+    "bookmarks": 0,
+    "history": 0,
+    "search": 0,
+    "wifi": 0
+}

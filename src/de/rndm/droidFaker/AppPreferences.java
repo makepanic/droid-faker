@@ -14,7 +14,17 @@ import android.preference.PreferenceManager;
  */
 
 public class AppPreferences {
+    public static final String COUNT_BOOKMARKS = "bookmarks.count";
+    public static final String COUNT_CALLS = "calls.count";
+    public static final String COUNT_CONTACT = "contact.count";
+    public static final String COUNT_HISTORY = "history.count";
+    public static final String COUNT_SEARCH = "search.count";
+    public static final String COUNT_SMS = "sms.count";
+    public static final String COUNT_WEB = "web.count";
+    public static final String COUNT_WIFI = "wifi.count";
+
     private static final String APP_SHARED_PREFS = "de.rndm.droidFaker";
+
     private SharedPreferences appSharedPrefs;
     private SharedPreferences.Editor prefsEditor;
 

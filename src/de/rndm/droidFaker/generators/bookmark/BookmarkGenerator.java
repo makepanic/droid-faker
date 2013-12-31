@@ -8,10 +8,10 @@ import android.provider.Browser;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.util.Log;
-import de.rndm.droidFaker.fixtures.Name;
+import de.rndm.droidFaker.FixtureSingleton;
+import de.rndm.droidFaker.FixtureType;
+import de.rndm.droidFaker.fixtures.*;
 import de.rndm.droidFaker.fixtures.Number;
-import de.rndm.droidFaker.fixtures.Text;
-import de.rndm.droidFaker.fixtures.Url;
 import de.rndm.droidFaker.generators.DataGenerator;
 
 import java.util.Random;
@@ -32,10 +32,11 @@ public class BookmarkGenerator implements DataGenerator {
     }
 
     private void insert(Random random){
+        Fixture fixture = FixtureSingleton.getInstance().getFixture(FixtureType.URL);
 
         final ContentValues bookmarkValues = new ContentValues();
-        bookmarkValues.put(Browser.BookmarkColumns.TITLE, Url.getOne(random));
-        bookmarkValues.put(Browser.BookmarkColumns.URL, Url.getOne(random));
+        bookmarkValues.put(Browser.BookmarkColumns.TITLE, fixture.getString(random));
+        bookmarkValues.put(Browser.BookmarkColumns.URL, fixture.getString(random));
         bookmarkValues.put(Browser.BookmarkColumns.BOOKMARK, 1);
 
         final Uri newBookmark = cr.insert(Browser.BOOKMARKS_URI, bookmarkValues);

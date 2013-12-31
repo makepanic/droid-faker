@@ -2,6 +2,7 @@ package de.rndm.droidFaker;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
+import de.rndm.droidFaker.generators.ApkInstaller;
 import de.rndm.droidFaker.generators.bookmark.BookmarkGenerator;
 import de.rndm.droidFaker.generators.calls.CallsGenerator;
 import de.rndm.droidFaker.generators.contact.ContactGenerator;
@@ -23,17 +25,18 @@ import de.rndm.droidFaker.generators.wifi.WifiSettingsGenerator;
 import de.rndm.droidFaker.model.*;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class MainActivity extends Activity {
 
-    private static final String CFG_FILE = "droid-faker.json";
     private static final String CFG_DIR = "droid-faker";
+    private static final String CFG_SCENARIOS = "scenarios";
+    private static final String CFG_APKS = "apks";
     private static final int RESULT_SETTINGS = 1;
 
     private Button buttonGenerateData;
     private Button buttonResetData;
-    private Button buttonConfig;
     private EditText seedText;
     private AppPreferences appPreferences;
     private ViewAnimator viewAnimator;
@@ -50,6 +53,13 @@ public class MainActivity extends Activity {
     private BookmarkGenerator bookmarkGenerator;
     private HistoryGenerator historyGenerator;
     private SearchGenerator searchGenerator;
+    private ApkInstaller apkInstaller;
+
+    private String cfgPath;
+    private ArrayAdapter apkAdapter;
+    private List<String> apkFiles;
+    private String apksPathString;
+    private ListView apkFilesList;
 
     /**
      * Called when the activity is first created.
@@ -60,7 +70,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         appPreferences = new AppPreferences(this);
 
-
         Date seedDate = new Date();
         seedText = (EditText) findViewById(R.id.seed);
         seedText.setText(appPreferences.getString("seed", "" + seedDate.getTime()));
@@ -69,32 +78,48 @@ public class MainActivity extends Activity {
         execTask = (TextView) findViewById(R.id.execTask);
         buttonGenerateData = (Button) findViewById(R.id.buttonCreate);
         buttonResetData = (Button) findViewById(R.id.buttonReset);
-        buttonConfig = (Button) findViewById(R.id.buttonConfigFile);
         scenarioSpinner = (Spinner) findViewById(R.id.scenarioSpinner);
+        apkFilesList = (ListView) findViewById(R.id.apkList);
 
         String extState = Environment.getExternalStorageState();
         if(!extState.equals(Environment.MEDIA_MOUNTED)) {
             Toast.makeText(getApplicationContext(), "SDCard nicht gemounted", Toast.LENGTH_LONG).show();
-        }
-        else {
-            final String cfgPath;
+        } else {
             File sd = Environment.getExternalStorageDirectory();
             cfgPath = sd.getAbsolutePath() + "/" + CFG_DIR + "/";
 
-            File cfg = new File(cfgPath);
+            // load apk files
+            File apksPath = new File(cfgPath + "/" + CFG_APKS + "/");
+            apksPathString = cfgPath + "/" + CFG_APKS + "/";
+            if (apksPath.exists()) {
+                ArrayList<String> fileList = new ArrayList<String>();
+                apkFiles = Arrays.asList(apksPath.list());
+                for(String apkFile: apkFiles){
+                    if (apkFile.endsWith("apk")){
+                        fileList.add(apkFile);
+                    }
+                }
 
-            if (cfg.exists()) {
-                final List<String> list = Arrays.asList(cfg.list());
+                apkFiles = fileList;
+                apkAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, apkFiles);
+                apkFilesList.setAdapter(apkAdapter);
+            }
 
+            // scenarios path
+            File scenariosPath = new File(cfgPath + "/" + CFG_SCENARIOS + "/");
+            final String scenariosPathString = cfgPath + "/" + CFG_SCENARIOS + "/";
+
+            if (scenariosPath.exists()) {
+                final List<String> list = Arrays.asList(scenariosPath.list());
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 scenarioSpinner.setAdapter(dataAdapter);
                 scenarioSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        String currentFilePath = cfgPath + list.get(i);
+                        String currentFilePath = scenariosPathString + list.get(i);
                         Log.i("itemSelect", "selected " + i);
-                        ConfigFile configFile = new ConfigFile(currentFilePath));
+                        ConfigFile configFile = new ConfigFile(currentFilePath);
                         configFile.load();
                         configFile.applyConfig(appPreferences);
                         seedText.setText("" + appPreferences.getInteger("seed"));
@@ -107,7 +132,7 @@ public class MainActivity extends Activity {
                     }
                 });
             } else {
-                Toast.makeText(getApplicationContext(), "Keine Config file gefunden " + cfgPath, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Keine Config file gefunden " + scenariosPathString, Toast.LENGTH_LONG).show();
             }
         }
 
@@ -118,6 +143,7 @@ public class MainActivity extends Activity {
         historyGenerator = new HistoryGenerator(getContentResolver());
         searchGenerator = new SearchGenerator(getContentResolver());
         wifiSettingsGenerator = new WifiSettingsGenerator(this);
+        apkInstaller = new ApkInstaller(this);
         webGenerator = new WebGenerator(this);
 
         final Animation inAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
@@ -140,13 +166,19 @@ public class MainActivity extends Activity {
                         seed = Long.valueOf(seedText.getText().toString());
                         Random random = new Random(seed);
                         contactGenerator.generate(random, appPreferences.getInteger(ContactSettings.PREF_COUNT, 100));
-                        smsGenerator.generate(random, appPreferences.getInteger(SmsSettings.PREF_COUNT, 100));
-                        callsGenerator.generate(random, appPreferences.getInteger(CallsSettings.PREF_COUNT, 100));
-                        bookmarkGenerator.generate(random, appPreferences.getInteger(BookmarkSettings.PREF_COUNT, 10));
-                        historyGenerator.generate(random, appPreferences.getInteger(HistorySettings.PREF_COUNT, 10));
-                        searchGenerator.generate(random, appPreferences.getInteger(SearchSettings.PREF_COUNT, 10));
-                        wifiSettingsGenerator.generate(random, appPreferences.getInteger(WifiSettings.PREF_COUNT, 2));
+                        smsGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_SMS, 100));
+                        callsGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_CALLS, 100));
+                        bookmarkGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_BOOKMARKS, 10));
+                        historyGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_HISTORY, 10));
+                        searchGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_SEARCH, 10));
+                        wifiSettingsGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_WIFI, 2));
                         webGenerator.generate(random, appPreferences.getInteger(WebGenerator.PREF_COUNT, 10));
+
+                        for (String apkFile : apkFiles) {
+                            String apkFilePath = apksPathString + apkFile;
+                            apkInstaller.installApk(apkFilePath);
+                        }
+
                         return random;
                     }
                     @Override

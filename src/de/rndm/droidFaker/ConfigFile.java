@@ -12,6 +12,7 @@ import java.io.FileReader;
 public class ConfigFile {
     private String path;
     private Config cfg;
+    private FixturesHolder fixturesHolder;
 
     public ConfigFile(String path) {
         this.path = path;
@@ -38,13 +39,17 @@ public class ConfigFile {
     public void applyConfig(AppPreferences appPreferences){
         Log.i("cfg.apply", this.cfg.toString());
         appPreferences.set(ContactSettings.PREF_COUNT, cfg.getContacts());
-        appPreferences.set(SmsSettings.PREF_COUNT, cfg.getSms());
-        appPreferences.set(CallsSettings.PREF_COUNT, cfg.getCalls());
-        appPreferences.set(BookmarkSettings.PREF_COUNT, cfg.getBookmarks());
-        appPreferences.set(HistorySettings.PREF_COUNT, cfg.getHistory());
-        appPreferences.set(SearchSettings.PREF_COUNT, cfg.getSearch());
-        appPreferences.set(WifiSettings.PREF_COUNT, cfg.getWifi());
+        appPreferences.set(AppPreferences.COUNT_SMS, cfg.getSms());
+        appPreferences.set(AppPreferences.COUNT_CALLS, cfg.getCalls());
+        appPreferences.set(AppPreferences.COUNT_BOOKMARKS, cfg.getBookmarks());
+        appPreferences.set(AppPreferences.COUNT_HISTORY, cfg.getHistory());
+        appPreferences.set(AppPreferences.COUNT_SEARCH, cfg.getSearch());
+        appPreferences.set(AppPreferences.COUNT_WIFI, cfg.getWifi());
         appPreferences.set(WebGenerator.PREF_COUNT, cfg.getWebsites());
         appPreferences.set("seed", cfg.getSeed());
+
+        fixturesHolder = cfg.buildFixturesHolder();
+
+        FixtureSingleton.init(fixturesHolder);
     }
 }

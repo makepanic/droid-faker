@@ -9,9 +9,13 @@ import java.util.Random;
  * Time: 21:02
  * To change this template use File | Settings | File Templates.
  */
-public class Number {
+public class Number extends Fixture {
 
     private static final int DEFAULT_LENGTH = 5;
+
+    public Number(String[] fixtures) {
+        super(fixtures);
+    }
 
     public static String getOne(Random random) {
         return getOne(random, DEFAULT_LENGTH);

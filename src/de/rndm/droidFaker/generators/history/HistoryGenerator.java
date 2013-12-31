@@ -5,8 +5,11 @@ import android.content.ContentValues;
 import android.net.Uri;
 import android.provider.Browser;
 import android.util.Log;
-import de.rndm.droidFaker.fixtures.Url;
+import de.rndm.droidFaker.FixtureSingleton;
+import de.rndm.droidFaker.FixtureType;
+import de.rndm.droidFaker.fixtures.Fixture;
 import de.rndm.droidFaker.generators.DataGenerator;
+import de.rndm.droidFaker.model.FixturesHolder;
 
 import java.util.Random;
 
@@ -26,7 +29,8 @@ public class HistoryGenerator implements DataGenerator {
     }
 
     private void insert(Random random){
-        Browser.updateVisitedHistory(cr, Url.getOne(random), true);
+        Fixture urlFixture = FixtureSingleton.getInstance().getFixture(FixtureType.URL);
+        Browser.updateVisitedHistory(cr, urlFixture.getString(random), true);
     }
 
     @Override
