@@ -75,6 +75,6 @@ Copy `move-to-sdcard` to the root of your sdcard.
 - email senden, entwürfe
 - root, wenn verfügbar geolocation
 - wifi geolocation möglich?
-- installation von anderen apps (ordner, url)
+- [done] installation von anderen apps (ordner, url)
     - http://router-keygen.en.uptodown.com/android
     - http://forum.xda-developers.com/showthread.php?t=2036411

@@ -16,6 +16,7 @@ public class ConfigFile {
 
     public ConfigFile(String path) {
         this.path = path;
+        this.load();
     }
 
     public void load(String path) {
@@ -38,6 +39,7 @@ public class ConfigFile {
 
     public void applyConfig(AppPreferences appPreferences){
         Log.i("cfg.apply", this.cfg.toString());
+        appPreferences.set(AppPreferences.VAL_SEED, cfg.getSeed());
         appPreferences.set(ContactSettings.PREF_COUNT, cfg.getContacts());
         appPreferences.set(AppPreferences.COUNT_SMS, cfg.getSms());
         appPreferences.set(AppPreferences.COUNT_CALLS, cfg.getCalls());
@@ -46,7 +48,6 @@ public class ConfigFile {
         appPreferences.set(AppPreferences.COUNT_SEARCH, cfg.getSearch());
         appPreferences.set(AppPreferences.COUNT_WIFI, cfg.getWifi());
         appPreferences.set(WebGenerator.PREF_COUNT, cfg.getWebsites());
-        appPreferences.set("seed", cfg.getSeed());
 
         fixturesHolder = cfg.buildFixturesHolder();
 

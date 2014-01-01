@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
  */
 
 public class AppPreferences {
+    public static final String VAL_SEED = "seed.val";
     public static final String COUNT_BOOKMARKS = "bookmarks.count";
     public static final String COUNT_CALLS = "calls.count";
     public static final String COUNT_CONTACT = "contact.count";
