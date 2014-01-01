@@ -46,5 +46,6 @@
     <string name="pref.search.summary.count">Anzahl der Suchen</string>
     <string name="open.config.file">Config Datei öffnen</string>
     <string name="using.apks">Using apks</string>
+    <string name="choose.scenario.file">Choose scenario file</string>
 
 </resources>

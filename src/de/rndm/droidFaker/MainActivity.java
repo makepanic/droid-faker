@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
@@ -123,7 +121,7 @@ public class MainActivity extends Activity {
     }
 
     @OnClick(R.id.buttonReset)
-    private void resetData(){
+    void resetData(){
         new AsyncTask<Void, Void, Void>(){
             @Override
             protected void onPreExecute() {
@@ -150,7 +148,7 @@ public class MainActivity extends Activity {
     }
 
     @OnClick(R.id.buttonCreate)
-    private void createData(){
+    void createData(){
         new AsyncTask<Void, Void, Random>(){
             @Override
             protected void onPreExecute() {
