@@ -14,6 +14,7 @@ public class Fixtures {
     private String[] street;
     private String[] title;
     private String[] url;
+    private String[] email;
     private String[] ssid;
 
     @Override
@@ -27,8 +28,17 @@ public class Fixtures {
                 ", street=" + Arrays.toString(street) +
                 ", title=" + Arrays.toString(title) +
                 ", url=" + Arrays.toString(url) +
+                ", email=" + Arrays.toString(email) +
                 ", ssid=" + Arrays.toString(ssid) +
                 '}';
+    }
+
+    public String[] getEmail() {
+        return email;
+    }
+
+    public void setEmail(String[] email) {
+        this.email = email;
     }
 
     public String[] getCity() {

@@ -19,6 +19,7 @@ import de.rndm.droidFaker.generators.ApkInstaller;
 import de.rndm.droidFaker.generators.bookmark.BookmarkGenerator;
 import de.rndm.droidFaker.generators.calls.CallsGenerator;
 import de.rndm.droidFaker.generators.contact.ContactGenerator;
+import de.rndm.droidFaker.generators.email.EmailGenerator;
 import de.rndm.droidFaker.generators.history.HistoryGenerator;
 import de.rndm.droidFaker.generators.search.SearchGenerator;
 import de.rndm.droidFaker.generators.sms.SmsGenerator;
@@ -56,6 +57,7 @@ public class MainActivity extends Activity {
     private HistoryGenerator historyGenerator;
     private SearchGenerator searchGenerator;
     private ApkInstaller apkInstaller;
+    private EmailGenerator emailGenerator;
 
     private String cfgPath;
     private List<String> apkFiles;
@@ -117,6 +119,7 @@ public class MainActivity extends Activity {
         wifiSettingsGenerator = new WifiSettingsGenerator(this);
         apkInstaller = new ApkInstaller(this);
         webGenerator = new WebGenerator(this);
+        emailGenerator = new EmailGenerator(this);
 
         final Animation inAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
         final Animation outAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
@@ -173,6 +176,7 @@ public class MainActivity extends Activity {
                 historyGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_HISTORY, 10));
                 searchGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_SEARCH, 10));
                 wifiSettingsGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_WIFI, 2));
+                emailGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_EMAIL, 10));
                 webGenerator.generate(random, appPreferences.getInteger(WebGenerator.PREF_COUNT, 10));
 
                 for (String apkFile : apkFiles) {

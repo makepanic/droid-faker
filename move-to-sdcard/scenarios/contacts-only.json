@@ -1,6 +1,9 @@
 {
     "seed": 9001,
     "fixtures": {
+        "email": [
+            "foo@bar.com"
+        ],
         "city": [
             "Berlin"
         ],
@@ -36,5 +39,6 @@
     "bookmarks": 0,
     "history": 0,
     "search": 0,
-    "wifi": 0
+    "wifi": 0,
+    "email": 0
 }

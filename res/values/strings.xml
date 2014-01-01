@@ -47,5 +47,8 @@
     <string name="open.config.file">Config Datei öffnen</string>
     <string name="using.apks">Using apks</string>
     <string name="choose.scenario.file">Choose scenario file</string>
+    <string name="emails">E-Mails</string>
+    <string name="pref.emails.summary.count">Anzahl der zu versendenen E-Mails</string>
+    <string name="emails.count">Anzahl E-Mails</string>
 
 </resources>

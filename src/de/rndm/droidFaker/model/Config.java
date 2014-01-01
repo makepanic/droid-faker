@@ -13,6 +13,7 @@ public class Config {
     private int history;
     private int search;
     private int wifi;
+    private int email;
     private FixturesHolder fixturesHolder;
 
     @Override
@@ -28,6 +29,8 @@ public class Config {
                 ", history=" + history +
                 ", search=" + search +
                 ", wifi=" + wifi +
+                ", email=" + email +
+                ", fixturesHolder=" + fixturesHolder +
                 '}';
     }
 
@@ -42,11 +45,20 @@ public class Config {
                     new Fixture(fixtures.getStreet()),
                     new Fixture(fixtures.getTitle()),
                     new Fixture(fixtures.getUrl()),
-                    new Fixture(fixtures.getSsid())
+                    new Fixture(fixtures.getSsid()),
+                    new Fixture(fixtures.getEmail())
             );
         }
 
         return fixturesHolder;
+    }
+
+    public int getEmail() {
+        return email;
+    }
+
+    public void setEmail(int email) {
+        this.email = email;
     }
 
     public Fixtures getFixtures() {

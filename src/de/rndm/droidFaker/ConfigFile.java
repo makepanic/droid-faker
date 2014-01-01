@@ -47,6 +47,7 @@ public class ConfigFile {
         appPreferences.set(AppPreferences.COUNT_HISTORY, cfg.getHistory());
         appPreferences.set(AppPreferences.COUNT_SEARCH, cfg.getSearch());
         appPreferences.set(AppPreferences.COUNT_WIFI, cfg.getWifi());
+        appPreferences.set(AppPreferences.COUNT_EMAIL, cfg.getEmail());
         appPreferences.set(WebGenerator.PREF_COUNT, cfg.getWebsites());
 
         fixturesHolder = cfg.buildFixturesHolder();

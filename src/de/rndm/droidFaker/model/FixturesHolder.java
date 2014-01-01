@@ -16,8 +16,9 @@ public class FixturesHolder {
     private Fixture title;
     private Fixture url;
     private Fixture ssid;
+    private Fixture email;
 
-    public FixturesHolder(Fixture city, Fixture company, Fixture country, Fixture name, Fixture nickname, Fixture street, Fixture title, Fixture url, Fixture ssid) {
+    public FixturesHolder(Fixture city, Fixture company, Fixture country, Fixture name, Fixture nickname, Fixture street, Fixture title, Fixture url, Fixture ssid, Fixture email) {
         this.city = city;
         this.company = company;
         this.country = country;
@@ -27,6 +28,7 @@ public class FixturesHolder {
         this.title = title;
         this.url = url;
         this.ssid = ssid;
+        this.email = email;
     }
 
     public Fixture getFixture(FixtureType what){
@@ -59,6 +61,9 @@ public class FixturesHolder {
                 break;
             case SSID:
                 result = this.ssid;
+                break;
+            case EMAIL:
+                result = this.email;
                 break;
         }
 

@@ -29,6 +29,16 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+            android:title="@string/emails"
+            android:key="pref.email">
+        <EditTextPreference
+                android:key="email.count"
+                android:summary="@string/pref.emails.summary.count"
+                android:inputType="number"
+                android:title="@string/emails.count" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
             android:title="@string/web"
             android:key="pref.calls">
         <EditTextPreference

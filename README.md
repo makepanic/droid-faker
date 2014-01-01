@@ -67,7 +67,7 @@ Copy `move-to-sdcard` to the root of your sdcard.
 - social network (fb, twitter, ...)
 - sync settings
 - [started] settings (wlan usw)
-- [todo] fotos
+- [done] fotos
 - geodaten
 - [started] browsercache, verlauf, suche, fav
 - [done] configfile
