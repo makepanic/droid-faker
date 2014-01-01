@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 
     private String cfgPath;
     private List<String> apkFiles;
-    private String apksPathString;
+    private FilePath apkPath;
 
     /**
      * Called when the activity is first created.
@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
             cfgPath = sd.getAbsolutePath() + "/" + CFG_DIR + "/";
 
             // load apk files
-            FilePath apkPath = new FilePath(cfgPath + "/" + CFG_APKS + "/");
+            apkPath = new FilePath(cfgPath + "/" + CFG_APKS + "/");
             if (apkPath.toFile().exists()) {
                 // create apk Files list and add adapter
                 apkFiles = Lists.newArrayList(Collections2.filter(Arrays.asList(apkPath.toFile().list()), Filter.isApk));
@@ -168,7 +168,7 @@ public class MainActivity extends Activity {
                 webGenerator.generate(random, appPreferences.getInteger(WebGenerator.PREF_COUNT, 10));
 
                 for (String apkFile : apkFiles) {
-                    String apkFilePath = apksPathString + apkFile;
+                    String apkFilePath = apkPath.toString() + apkFile;
                     apkInstaller.installApk(apkFilePath);
                 }
 
