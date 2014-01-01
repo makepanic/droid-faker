@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 
     private static final String CFG_DIR = "droid-faker";
     private static final String CFG_SCENARIOS = "scenarios";
+    private static final String CFG_PHOTOS = "photos";
     private static final String CFG_APKS = "apks";
     private static final int RESULT_SETTINGS = 1;
 
@@ -59,6 +60,7 @@ public class MainActivity extends Activity {
     private String cfgPath;
     private List<String> apkFiles;
     private FilePath apkPath;
+    private FilePath photosPath;
 
     /**
      * Called when the activity is first created.
@@ -101,6 +103,9 @@ public class MainActivity extends Activity {
             } else {
                 Toast.makeText(getApplicationContext(), "Keine Config file gefunden " + scenarioPath.toString(), Toast.LENGTH_LONG).show();
             }
+
+            // copy photos
+            photosPath = new FilePath(cfgPath + "/" + CFG_PHOTOS + "/");
         }
 
         contactGenerator = new ContactGenerator(getContentResolver());
@@ -157,6 +162,9 @@ public class MainActivity extends Activity {
             }
             @Override
             protected Random doInBackground(Void... voids) {
+
+                CopyPhotos.copyInDir(photosPath);
+
                 Random random = new Random(appPreferences.getInteger(AppPreferences.VAL_SEED));
                 contactGenerator.generate(random, appPreferences.getInteger(ContactSettings.PREF_COUNT, 100));
                 smsGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_SMS, 100));
