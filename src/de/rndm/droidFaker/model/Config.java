@@ -2,8 +2,10 @@ package de.rndm.droidFaker.model;
 
 import de.rndm.droidFaker.fixtures.*;
 
+import java.util.HashMap;
+
 public class Config {
-    private Fixtures fixtures;
+    private HashMap<String, String[]> fixtures;
     private int seed;
     private int contacts;
     private int sms;
@@ -36,18 +38,7 @@ public class Config {
 
     public FixturesHolder buildFixturesHolder(){
         if (fixturesHolder == null){
-            fixturesHolder = new FixturesHolder(
-                    new Fixture(fixtures.getCity()),
-                    new Fixture(fixtures.getCompany()),
-                    new Fixture(fixtures.getCountry()),
-                    new Fixture(fixtures.getName()),
-                    new Fixture(fixtures.getNickname()),
-                    new Fixture(fixtures.getStreet()),
-                    new Fixture(fixtures.getTitle()),
-                    new Fixture(fixtures.getUrl()),
-                    new Fixture(fixtures.getSsid()),
-                    new Fixture(fixtures.getEmail())
-            );
+            fixturesHolder = new FixturesHolder(fixtures);
         }
 
         return fixturesHolder;
@@ -59,14 +50,6 @@ public class Config {
 
     public void setEmail(int email) {
         this.email = email;
-    }
-
-    public Fixtures getFixtures() {
-        return fixtures;
-    }
-
-    public void setFixtures(Fixtures fixtures) {
-        this.fixtures = fixtures;
     }
 
     public int getWifi() {

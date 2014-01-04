@@ -4,11 +4,22 @@
 
 An android application to generate contact, message and more user related data.
 
+##adding fixture fields
+
+To register a new fixture to be useable in the scenario `*.json` file you have to add the key to the `FixtureType` enum
+
+__Example:__
+
+Add "operating-systems" to `scenarios/*.json` and add a new enum `OS("operating-system")` to `FixtureType`.
+Once the config is loaded you can access the generated Fixture using `FixtureSingleton.getInstance().getFixture(FixtureType.OS)`.
+
 ##config
 
 Copy `move-to-sdcard` to the root of your sdcard.
 
 ##Getting fixture values
+
+Default fixtures (with possible strings to fill them (run in chromium devtools console)):
 
 ###city
 

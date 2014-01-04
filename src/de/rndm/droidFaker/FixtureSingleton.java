@@ -1,13 +1,7 @@
 package de.rndm.droidFaker;
 
-import android.util.Log;
-import de.rndm.droidFaker.fixtures.Fixture;
-import de.rndm.droidFaker.model.Fixtures;
 import de.rndm.droidFaker.model.FixturesHolder;
 
-/**
- * Created by mkp on 31.12.13.
- */
 public class FixtureSingleton {
     private static FixturesHolder instance = null;
 
