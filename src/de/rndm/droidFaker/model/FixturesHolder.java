@@ -6,8 +6,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Created by mkp on 31.12.13.
- */
+ * User: rndm
+ * Date: 31.12.13
+ * Time: 00:33
+*/
 public class FixturesHolder {
     private HashMap<String, Fixture> fixtures = new HashMap<String, Fixture>();
 

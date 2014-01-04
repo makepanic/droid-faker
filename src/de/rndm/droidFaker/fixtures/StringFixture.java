@@ -1,7 +1,7 @@
 package de.rndm.droidFaker.fixtures;
 
 /**
- * Created by mkp on 31.12.13.
+ * User: rndm
  */
 public class StringFixture extends Fixture {
     public StringFixture(String[] fixtures) {

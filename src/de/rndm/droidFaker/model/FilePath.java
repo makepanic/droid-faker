@@ -3,7 +3,7 @@ package de.rndm.droidFaker.model;
 import java.io.File;
 
 /**
- * Created by mkp on 01.01.14.
+ * User: rndm
  */
 public class FilePath {
     private File file;

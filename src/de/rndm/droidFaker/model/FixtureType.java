@@ -1,8 +1,10 @@
 package de.rndm.droidFaker.model;
 
 /**
- * Created by mkp on 31.12.13.
- */
+ * User: rndm
+ * Date: 31.12.13
+ * Time: 00:33
+*/
 public enum FixtureType {
     CITY("city"), COMPANY("company"), COUNTRY("country"), NAME("name"), NICKNAME("nickname"), STREET("street"), TITLE("title"), URL("url"), SSID("ssid"), EMAIL("email");
 

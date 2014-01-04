@@ -1,8 +1,7 @@
 package de.rndm.droidFaker.model;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Christian Schulz - mkp
+ * User: rndm
  * Date: 04.01.14
  * Time: 23:00
  */

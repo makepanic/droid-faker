@@ -12,7 +12,7 @@ import de.rndm.droidFaker.generators.DataGenerator;
 import java.util.Random;
 
 /**
- * Created by mkp on 01.01.14.
+ * User: rndm
  */
 public class EmailGenerator implements DataGenerator {
     private static final String PREF_EMAIL = "email.count";

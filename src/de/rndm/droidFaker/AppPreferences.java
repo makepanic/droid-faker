@@ -6,11 +6,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 /**
- * Created with IntelliJ IDEA.
- * User: mkp
+ * User: rndm
  * Date: 20.10.13
  * Time: 17:17
- * To change this template use File | Settings | File Templates.
  */
 
 public class AppPreferences {

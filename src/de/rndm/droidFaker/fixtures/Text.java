@@ -3,11 +3,9 @@ package de.rndm.droidFaker.fixtures;
 import java.util.Random;
 
 /**
- * Created with IntelliJ IDEA.
- * User: mkp
+ * User: rndm
  * Date: 26.10.13
  * Time: 21:49
- * To change this template use File | Settings | File Templates.
  */
 public class Text {
 

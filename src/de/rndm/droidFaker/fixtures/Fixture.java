@@ -3,7 +3,7 @@ package de.rndm.droidFaker.fixtures;
 import java.util.Random;
 
 /**
- * Created by mkp on 31.12.13.
+ * User: rndm
  */
 public class Fixture {
     private String[] fixtures;

@@ -11,8 +11,7 @@ import de.rndm.droidFaker.generators.DataGenerator;
 import java.util.Random;
 
 /**
- * Created with IntelliJ IDEA.
- * User: mkp
+ * User: rndm
  * Date: 24.11.13
  * Time: 14:28
  * To change this template use File | Settings | File Templates.

@@ -3,7 +3,7 @@ package de.rndm.droidFaker.model;
 import com.google.common.base.Predicate;
 
 /**
- * Created by mkp on 01.01.14.
+ * User: rndm
  */
 public class Filter {
     public static Predicate<String> isApk = new Predicate<String>() {

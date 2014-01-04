@@ -14,8 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by mkp on 01.01.14.
- */
+ * User: rndm
+ * Date: 01.01.14
+ * Time: 00:33
+*/
 public class CopyPhotos {
     public static void copyInDir(FilePath srcDir){
         if (srcDir.toFile().exists()) {

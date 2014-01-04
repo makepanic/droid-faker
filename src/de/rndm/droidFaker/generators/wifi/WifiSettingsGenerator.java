@@ -14,11 +14,9 @@ import de.rndm.droidFaker.generators.DataGenerator;
 import java.util.Random;
 
 /**
- * Created with IntelliJ IDEA.
- * User: mkp
+ * User: rndm
  * Date: 26.10.13
  * Time: 21:30
- * To change this template use File | Settings | File Templates.
  * @via http://stackoverflow.com/a/4374934
  */
 public class WifiSettingsGenerator implements DataGenerator {

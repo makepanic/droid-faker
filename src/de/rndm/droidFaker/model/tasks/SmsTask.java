@@ -7,8 +7,7 @@ import de.rndm.droidFaker.model.ReflectedTask;
 import java.util.HashMap;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Christian Schulz - mkp
+ * User: rndm
  * Date: 04.01.14
  * Time: 20:36
  */

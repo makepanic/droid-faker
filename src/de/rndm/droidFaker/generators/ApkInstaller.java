@@ -8,7 +8,7 @@ import android.util.Log;
 import java.io.File;
 
 /**
- * Created by mkp on 31.12.13.
+ * User: rndm
  */
 public class ApkInstaller {
     private Context context;
