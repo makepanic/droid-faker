@@ -2,10 +2,12 @@ package de.rndm.droidFaker.model;
 
 import de.rndm.droidFaker.fixtures.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Config {
     private HashMap<String, String[]> fixtures;
+    private ArrayList<HashMap<String, Object>> tasks;
     private int seed;
     private int contacts;
     private int sms;
@@ -16,6 +18,8 @@ public class Config {
     private int search;
     private int wifi;
     private int email;
+
+    private TaskHolder taskHolder;
     private FixturesHolder fixturesHolder;
 
     @Override
@@ -42,6 +46,14 @@ public class Config {
         }
 
         return fixturesHolder;
+    }
+
+    public TaskHolder buildTaskHolder(){
+        if (taskHolder == null){
+            taskHolder = new TaskHolder(tasks);
+        }
+
+        return taskHolder;
     }
 
     public int getEmail() {

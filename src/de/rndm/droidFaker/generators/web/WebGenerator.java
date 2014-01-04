@@ -3,19 +3,11 @@ package de.rndm.droidFaker.generators.web;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Toast;
-import de.rndm.droidFaker.Callback;
-import de.rndm.droidFaker.FixtureSingleton;
-import de.rndm.droidFaker.FixtureType;
+import de.rndm.droidFaker.model.FixtureSingleton;
+import de.rndm.droidFaker.model.FixtureType;
 import de.rndm.droidFaker.fixtures.Fixture;
-import de.rndm.droidFaker.generators.AsyncGenerator;
 import de.rndm.droidFaker.generators.DataGenerator;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -27,12 +19,15 @@ import java.util.Random;
  */
 public class WebGenerator implements DataGenerator {
 
-    public static final String PREF_COUNT = "web.count";
-
     private Context context;
 
     public WebGenerator(Context context) {
         this.context = context;
+    }
+
+    public void insert(String url){
+        Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(url));
+        context.startActivity(viewIntent);
     }
 
     @Override
@@ -40,8 +35,7 @@ public class WebGenerator implements DataGenerator {
         Fixture urlFixture = FixtureSingleton.getInstance().getFixture(FixtureType.URL);
 
         for (int i = 0; i < amount; i++) {
-            Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(urlFixture.getString(random)));
-            context.startActivity(viewIntent);
+            insert(urlFixture.getString(random));
         }
     }
 

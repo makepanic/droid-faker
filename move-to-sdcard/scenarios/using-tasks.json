@@ -1,0 +1,70 @@
+{
+    "seed": 9001,
+    "tasks": [{
+        "type": "SMS",
+        "from": "012346789",
+        "text": "foooofofofo"
+    },{
+        "type": "BOOKMARK",
+        "title": "duckduckgo",
+        "url": "https://duckduckgo.com/"
+    },{
+        "type": "WEB",
+        "url": "https://diasporafoundation.org/"
+    },{
+        "type": "WIFI",
+        "ssid": "your-wep-wifi",
+        "pass": "my-wep-pass"
+    },{
+        "type": "CALL",
+        "number": "0123456789",
+        "name": "John D. Carmack",
+        "numberLabel": "numberLabel",
+        "date": "725842800000",
+        "duration": "666"
+    },{
+        "type": "EMAIL",
+        "receiver": "foo@bar.de",
+        "subject": "DroidFaker",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue."
+    },{
+        "type": "HISTORY",
+        "url": "https://www.archlinux.org/"
+    },{
+        "type": "SEARCH",
+        "url": "https://www.archlinux.org/"
+    },{
+        "type": "CONTACT",
+        "number": "0123456789",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "street": "Adams Street",
+        "city": "Aachen",
+        "postCode": "12345",
+        "country": "Germany",
+        "company": "Pixar",
+        "title": "Human Creative Facilitator",
+        "nickname": "The Apostle of Democracy"
+    }],
+    "fixtures": {
+        "email": [],
+        "city": [],
+        "company": [],
+        "country": [],
+        "name": [],
+        "nickname": [],
+        "street": [],
+        "title": [],
+        "url": [],
+        "ssid": []
+    },
+    "contacts": 0,
+    "sms": 0,
+    "calls": 0,
+    "websites": 0,
+    "bookmarks": 0,
+    "history": 0,
+    "search": 0,
+    "wifi": 0,
+    "email": 0
+}

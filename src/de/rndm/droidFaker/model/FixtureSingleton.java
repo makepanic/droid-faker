@@ -1,4 +1,4 @@
-package de.rndm.droidFaker;
+package de.rndm.droidFaker.model;
 
 import de.rndm.droidFaker.model.FixturesHolder;
 

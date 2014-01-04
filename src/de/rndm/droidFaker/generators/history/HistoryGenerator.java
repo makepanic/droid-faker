@@ -1,15 +1,11 @@
 package de.rndm.droidFaker.generators.history;
 
 import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.net.Uri;
 import android.provider.Browser;
-import android.util.Log;
-import de.rndm.droidFaker.FixtureSingleton;
-import de.rndm.droidFaker.FixtureType;
+import de.rndm.droidFaker.model.FixtureSingleton;
+import de.rndm.droidFaker.model.FixtureType;
 import de.rndm.droidFaker.fixtures.Fixture;
 import de.rndm.droidFaker.generators.DataGenerator;
-import de.rndm.droidFaker.model.FixturesHolder;
 
 import java.util.Random;
 
@@ -28,16 +24,16 @@ public class HistoryGenerator implements DataGenerator {
         this.cr = cr;
     }
 
-    private void insert(Random random){
-        Fixture urlFixture = FixtureSingleton.getInstance().getFixture(FixtureType.URL);
-        Browser.updateVisitedHistory(cr, urlFixture.getString(random), true);
+    public void insert(String url){
+        Browser.updateVisitedHistory(cr, url, true);
     }
 
     @Override
     public void generate(Random random, int amount) {
+        Fixture urlFixture = FixtureSingleton.getInstance().getFixture(FixtureType.URL);
 
         for (int i = 0; i < amount; i++) {
-            insert(random);
+            insert(urlFixture.getString(random));
         }
     }
 

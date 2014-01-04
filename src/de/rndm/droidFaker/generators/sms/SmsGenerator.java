@@ -5,8 +5,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
-import de.rndm.droidFaker.FixtureSingleton;
-import de.rndm.droidFaker.FixtureType;
+import de.rndm.droidFaker.model.FixtureSingleton;
+import de.rndm.droidFaker.model.FixtureType;
 import de.rndm.droidFaker.fixtures.Fixture;
 import de.rndm.droidFaker.fixtures.Text;
 import de.rndm.droidFaker.generators.DataGenerator;
@@ -28,16 +28,21 @@ public class SmsGenerator implements DataGenerator {
         this.cr = cr;
     }
 
+    public void insert(String address, String body){
+        ContentValues values = new ContentValues();
+        values.put("address", address);
+        values.put("body", body);
+        cr.insert(Uri.parse("content://sms/inbox"), values);
+
+    }
+
     @Override
     public void generate(Random random, int amount) {
         Fixture nameFixture = FixtureSingleton.getInstance().getFixture(FixtureType.NAME);
         Log.i("SmsGenerator", "generate " + amount);
 
         for(int i = 0; i < amount; i++) {
-            ContentValues values = new ContentValues();
-            values.put("address", nameFixture.getString(random) + ' ' + nameFixture.getString(random));
-            values.put("body", Text.getText(random, 100));
-            cr.insert(Uri.parse("content://sms/inbox"), values);
+            insert(nameFixture.getString(random) + ' ' + nameFixture.getString(random), Text.getText(random, 100));
         }
     }
 

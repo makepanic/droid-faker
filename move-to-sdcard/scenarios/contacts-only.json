@@ -1,5 +1,6 @@
 {
     "seed": 9001,
+    "tasks": [],
     "fixtures": {
         "email": [
             "foo@bar.com"

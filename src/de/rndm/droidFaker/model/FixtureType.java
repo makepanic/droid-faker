@@ -1,4 +1,4 @@
-package de.rndm.droidFaker;
+package de.rndm.droidFaker.model;
 
 /**
  * Created by mkp on 31.12.13.

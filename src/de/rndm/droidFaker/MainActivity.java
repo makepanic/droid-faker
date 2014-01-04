@@ -1,6 +1,7 @@
 package de.rndm.droidFaker;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ public class MainActivity extends Activity {
     @InjectView(R.id.apkList) ListView apkFilesListView;
 
     private AppPreferences appPreferences;
+    private Context context;
 
     private ContactGenerator contactGenerator;
     private SmsGenerator smsGenerator;
@@ -76,6 +78,7 @@ public class MainActivity extends Activity {
 
 
         appPreferences = new AppPreferences(this);
+        context = this;
 
         // access external storage
         String extState = Environment.getExternalStorageState();
@@ -169,7 +172,10 @@ public class MainActivity extends Activity {
                 CopyPhotos.copyInDir(photosPath);
 
                 Random random = new Random(appPreferences.getInteger(AppPreferences.VAL_SEED));
-                contactGenerator.generate(random, appPreferences.getInteger(ContactSettings.PREF_COUNT, 100));
+
+                TasksSingleton.getInstance().exec(context);
+
+                contactGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_CONTACT, 100));
                 smsGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_SMS, 100));
                 callsGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_CALLS, 100));
                 bookmarkGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_BOOKMARKS, 10));
@@ -177,7 +183,7 @@ public class MainActivity extends Activity {
                 searchGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_SEARCH, 10));
                 wifiSettingsGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_WIFI, 2));
                 emailGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_EMAIL, 10));
-                webGenerator.generate(random, appPreferences.getInteger(WebGenerator.PREF_COUNT, 10));
+                webGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_WEB, 10));
 
                 for (String apkFile : apkFiles) {
                     String apkFilePath = apkPath.toString() + apkFile;

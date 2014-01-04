@@ -13,9 +13,44 @@ __Example:__
 Add "operating-systems" to `scenarios/*.json` and add a new enum `OS("operating-system")` to `FixtureType`.
 Once the config is loaded you can access the generated Fixture using `FixtureSingleton.getInstance().getFixture(FixtureType.OS)`.
 
+##adding Tasks
+
+To register a new task to be available in the scenario `*.json` file you have to create a Class in `model.tasks`.
+The Classname results in a type for the config `tasks.type` field.
+
+__Example:__
+
+Add `model.tasks.RebootTask` to make an JSON-Object with type `REBOOT` available. The new Class must extend `Task` and implement `ReflectedTask`.
+The `init(HashMap<String, Object> map)` method gives you access to the values inside the given JSON-Object.
+
+If you have a JSON object:
+
+```
+{
+    "type": "REBOOT",
+    "offset": "100"
+}
+
+```
+
+You can set the `offset` value in the `init` method:
+
+
+```
+    @Override
+    public void init(HashMap<String, Object> map) {
+        this.offset = (String) map.get("offset");
+    }
+```
+
+The `run` method is called once the user clicked the generate button.
+
+
 ##config
 
 Copy `move-to-sdcard` to the root of your sdcard.
+
+
 
 ##Getting fixture values
 

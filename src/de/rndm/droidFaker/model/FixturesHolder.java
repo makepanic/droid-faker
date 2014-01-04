@@ -1,6 +1,5 @@
 package de.rndm.droidFaker.model;
 
-import de.rndm.droidFaker.FixtureType;
 import de.rndm.droidFaker.fixtures.Fixture;
 
 import java.util.HashMap;
@@ -27,5 +26,12 @@ public class FixturesHolder {
 
     public Fixture getFixture(FixtureType what){
         return fixtures.get(what.toString());
+    }
+
+    @Override
+    public String toString() {
+        return "FixturesHolder{" +
+                "fixtures=" + fixtures +
+                '}';
     }
 }

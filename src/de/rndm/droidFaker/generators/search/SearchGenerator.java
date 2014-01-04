@@ -22,15 +22,15 @@ public class SearchGenerator implements DataGenerator {
         this.cr = cr;
     }
 
-    private void insert(Random random){
-        Browser.addSearchUrl(cr, Text.getText(random, 10) + " ");
+    public void insert(String query){
+        Browser.addSearchUrl(cr, query);
     }
 
     @Override
     public void generate(Random random, int amount) {
 
         for (int i = 0; i < amount; i++) {
-            insert(random);
+            insert(Text.getText(random, 10) + " ");
         }
     }
 

@@ -13,6 +13,7 @@ public class ConfigFile {
     private String path;
     private Config cfg;
     private FixturesHolder fixturesHolder;
+    private TaskHolder taskHolder;
 
     public ConfigFile(String path) {
         this.path = path;
@@ -40,7 +41,7 @@ public class ConfigFile {
     public void applyConfig(AppPreferences appPreferences){
         Log.i("cfg.apply", this.cfg.toString());
         appPreferences.set(AppPreferences.VAL_SEED, cfg.getSeed());
-        appPreferences.set(ContactSettings.PREF_COUNT, cfg.getContacts());
+        appPreferences.set(AppPreferences.COUNT_CONTACT, cfg.getContacts());
         appPreferences.set(AppPreferences.COUNT_SMS, cfg.getSms());
         appPreferences.set(AppPreferences.COUNT_CALLS, cfg.getCalls());
         appPreferences.set(AppPreferences.COUNT_BOOKMARKS, cfg.getBookmarks());
@@ -48,10 +49,16 @@ public class ConfigFile {
         appPreferences.set(AppPreferences.COUNT_SEARCH, cfg.getSearch());
         appPreferences.set(AppPreferences.COUNT_WIFI, cfg.getWifi());
         appPreferences.set(AppPreferences.COUNT_EMAIL, cfg.getEmail());
-        appPreferences.set(WebGenerator.PREF_COUNT, cfg.getWebsites());
+        appPreferences.set(AppPreferences.COUNT_WEB, cfg.getWebsites());
 
         fixturesHolder = cfg.buildFixturesHolder();
+        taskHolder = cfg.buildTaskHolder();
 
         FixtureSingleton.init(fixturesHolder);
+        TasksSingleton.init(taskHolder);
+    }
+
+    public TaskHolder getTaskHolder() {
+        return taskHolder;
     }
 }
