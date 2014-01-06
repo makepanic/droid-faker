@@ -20,10 +20,19 @@ public class SearchGenerator implements DataGenerator {
         this.cr = cr;
     }
 
+    /**
+     * Inserts a query to the browser search database
+     * @param query browser search query
+     */
     public void insert(String query){
         Browser.addSearchUrl(cr, query);
     }
 
+    /**
+     * Generates a given amount of random browser search items
+     * @param random Random object
+     * @param amount number of objects to insert
+     */
     @Override
     public void generate(Random random, int amount) {
 
@@ -32,6 +41,9 @@ public class SearchGenerator implements DataGenerator {
         }
     }
 
+    /**
+     * clears the browser search database
+     */
     @Override
     public void reset() {
         Browser.clearSearches(cr);

@@ -8,6 +8,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+/**
+ * Class that represents the droid-faker config file
+ */
 public class ConfigFile {
     private String path;
     private Config cfg;
@@ -22,6 +25,9 @@ public class ConfigFile {
         this.load();
     }
 
+    /**
+     * Loads the config file from the object path variable using {@link com.google.gson.Gson}
+     */
     public void load(){
         Gson gson = new Gson();
 
@@ -35,6 +41,10 @@ public class ConfigFile {
         }
     }
 
+    /**
+     * applies config properties to the given {@link de.rndm.droidFaker.AppPreferences} object
+     * @param appPreferences object where all properties are going to be set
+     */
     public void applyConfig(AppPreferences appPreferences){
         Log.i("cfg.apply", this.cfg.toString());
         appPreferences.set(AppPreferences.VAL_SEED, cfg.getSeed());

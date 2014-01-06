@@ -8,6 +8,15 @@ import java.util.Random;
  * Time: 17:24
  */
 public interface DataGenerator {
+    /**
+     * Generates a given amount of something
+     * @param random Random object
+     * @param amount number of objects to insert
+     */
     public void generate(Random random, int amount);
+
+    /**
+     * deletes everything from something
+     */
     public void reset();
 }

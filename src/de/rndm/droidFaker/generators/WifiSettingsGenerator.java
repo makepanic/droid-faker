@@ -30,6 +30,11 @@ public class WifiSettingsGenerator implements DataGenerator {
         this.ctx = ctx;
     }
 
+    /**
+     * Inserts a new WEP WIFI configuration entry
+     * @param ssid wifi ssid
+     * @param pass wifi password
+     */
     public void insert(String ssid, String pass){
         WifiManager wifi = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
         WifiConfiguration wc = new WifiConfiguration();
@@ -54,6 +59,11 @@ public class WifiSettingsGenerator implements DataGenerator {
         wifi.saveConfiguration();
     }
 
+    /**
+     * Generates a given amount of random WIFI configurations
+     * @param random Random object
+     * @param amount number of objects to insert
+     */
     @Override
     public void generate(Random random, int amount) {
         Log.i("SmsGenerator", "generate " + amount);
@@ -66,6 +76,9 @@ public class WifiSettingsGenerator implements DataGenerator {
         }
     }
 
+    /**
+     * Deletes the wifi configuration if wifi is enabled
+     */
     @Override
     public void reset() {
         WifiManager wifi = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);

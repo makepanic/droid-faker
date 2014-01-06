@@ -11,6 +11,9 @@ import android.preference.PreferenceManager;
  * Time: 17:17
  */
 
+/**
+ * {@link android.content.SharedPreferences} wrapper
+ */
 public class AppPreferences {
     public static final String VAL_SEED = "seed.val";
     public static final String COUNT_BOOKMARKS = "bookmarks.count";

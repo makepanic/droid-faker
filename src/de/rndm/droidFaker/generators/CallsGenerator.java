@@ -26,6 +26,15 @@ public class CallsGenerator implements DataGenerator {
         this.cr = cr;
     }
 
+    /**
+     * Inserts a calllog item using given parameters
+     * @param number telephone number
+     * @param date call timestamp (epoch milliseconds)
+     * @param duration call duration
+     * @param cachedName call name
+     * @param cachedNumberLabel call number label
+     * @see <a href="https://developer.android.com/reference/android/provider/CallLog.Calls.html">developer.android.com/reference/android/provider/CallLog.Calls.html</a>
+     */
     public void insert(String number, long date, long duration, String cachedName, String cachedNumberLabel){
         //To change body of implemented methods use File | Settings | File Templates.
         ContentValues values = new ContentValues();
@@ -40,6 +49,11 @@ public class CallsGenerator implements DataGenerator {
         cr.insert(CallLog.Calls.CONTENT_URI, values);
     }
 
+    /**
+     * inserts a given amount of call log items
+     * @param random Random object
+     * @param amount number of call log items to insert
+     */
     @Override
     public void generate(Random random, int amount) {
         Log.i("CallsGenerator", "generate " + amount);
@@ -54,6 +68,9 @@ public class CallsGenerator implements DataGenerator {
         }
     }
 
+    /**
+     * Deletes all call log items
+     */
     @Override
     public void reset() {
         cr.delete(CallLog.Calls.CONTENT_URI, "date > 0", null);

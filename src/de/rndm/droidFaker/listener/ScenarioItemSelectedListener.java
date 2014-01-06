@@ -8,6 +8,9 @@ import de.rndm.droidFaker.model.FilePath;
 
 import java.util.List;
 
+/**
+ * ItemSelectedListener that creates a {@link de.rndm.droidFaker.ConfigFile} from a given path
+ */
 public class ScenarioItemSelectedListener implements android.widget.AdapterView.OnItemSelectedListener {
     private final FilePath scenarioPath;
     private final AppPreferences appPreferences;

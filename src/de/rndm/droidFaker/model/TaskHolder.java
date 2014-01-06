@@ -13,15 +13,27 @@ import java.util.HashMap;
  * Date: 04.01.14
  * Time: 20:45
  */
+
+/**
+ * Class that holds a list of {@link de.rndm.droidFaker.model.tasks.Task}
+ */
 public class TaskHolder {
     private ArrayList<Task> tasks = new ArrayList<Task>();
 
+    /**
+     * Calls the run method on each Task in the list
+     * @param context application context
+     */
     public void exec(Context context){
         for(Task task: tasks){
             task.run(context);
         }
     }
 
+    /**
+     * Initializes all Task classes from a given list of HashMaps and stores them in the tasks field
+     * @param tasks List that represents the "tasks" field from the config file
+     */
     public TaskHolder(ArrayList<HashMap<String, Object>> tasks) {
 
         for(HashMap<String, Object> taskMap: tasks){

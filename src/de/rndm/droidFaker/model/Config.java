@@ -3,6 +3,9 @@ package de.rndm.droidFaker.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Object that represents the droid-faker configuration file and is used by {@link com.google.gson.Gson} to convert the JSON file
+ */
 public class Config {
     private HashMap<String, String[]> fixtures;
     private ArrayList<HashMap<String, Object>> tasks;
@@ -38,6 +41,10 @@ public class Config {
                 '}';
     }
 
+    /**
+     * creates a {@link de.rndm.droidFaker.model.FixturesHolder} from object fixtures
+     * @return created FixturesHolder
+     */
     public FixturesHolder buildFixturesHolder(){
         if (fixturesHolder == null){
             fixturesHolder = new FixturesHolder(fixtures);
@@ -46,6 +53,10 @@ public class Config {
         return fixturesHolder;
     }
 
+    /**
+     * creates a {@link de.rndm.droidFaker.model.TaskHolder} from object tasks
+     * @return created TaskHolder
+     */
     public TaskHolder buildTaskHolder(){
         if (taskHolder == null){
             taskHolder = new TaskHolder(tasks);

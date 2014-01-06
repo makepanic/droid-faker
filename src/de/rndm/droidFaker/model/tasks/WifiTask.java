@@ -24,6 +24,10 @@ public class WifiTask extends Task implements ReflectedTask {
         this.pass = (String) map.get("pass");
     }
 
+    /**
+     * Calls the {@link de.rndm.droidFaker.generators.WifiSettingsGenerator} with object parameters
+     * @param context useful object to access contentResolver or applicationContext
+     */
     @Override
     public void run(Context context) {
         WifiSettingsGenerator wifiSettingsGenerator = new WifiSettingsGenerator(context);

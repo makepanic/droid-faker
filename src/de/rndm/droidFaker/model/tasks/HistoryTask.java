@@ -22,6 +22,10 @@ public class HistoryTask extends Task implements ReflectedTask {
         this.url = (String) map.get("url");
     }
 
+    /**
+     * Calls the {@link de.rndm.droidFaker.generators.HistoryGenerator} with object parameters
+     * @param context useful object to access contentResolver or applicationContext
+     */
     @Override
     public void run(Context context) {
         HistoryGenerator historyGenerator = new HistoryGenerator(context.getContentResolver());

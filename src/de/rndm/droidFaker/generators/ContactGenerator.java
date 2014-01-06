@@ -33,6 +33,19 @@ public class ContactGenerator implements DataGenerator {
         this.cr = cr;
     }
 
+    /**
+     * inserts a new contact using given parameters
+     * @param number contact phone number
+     * @param firstName contact firstname
+     * @param lastName contact lastname
+     * @param street contact street
+     * @param city contact city
+     * @param postCode contact postcode
+     * @param country contact country
+     * @param company contact company
+     * @param title contact job title
+     * @param nickname contact nickname
+     */
     public void insert(String number,
                        String firstName,
                        String lastName,
@@ -142,6 +155,11 @@ public class ContactGenerator implements DataGenerator {
 
     }
 
+    /**
+     * Generates a given amount of random contacts
+     * @param random Random object
+     * @param amount number of contacts
+     */
     @Override
     public void generate(Random random, int amount) {
         Log.i("ContactGenerator", "generate " + amount);
@@ -174,6 +192,7 @@ public class ContactGenerator implements DataGenerator {
     }
 
     /**
+     * Deletes all contacts
      * @see <a href="http://stackoverflow.com/a/7025118">http://stackoverflow.com/a/7025118</a>
      */
     @Override

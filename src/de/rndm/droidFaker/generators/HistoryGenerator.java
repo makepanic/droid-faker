@@ -24,10 +24,19 @@ public class HistoryGenerator implements DataGenerator {
         this.cr = cr;
     }
 
+    /**
+     * Inserts a new visited website to the browser history
+     * @param url website url
+     */
     public void insert(String url){
         Browser.updateVisitedHistory(cr, url, true);
     }
 
+    /**
+     * Generates a given amount of random browser history items
+     * @param random Random object
+     * @param amount number of objects to insert
+     */
     @Override
     public void generate(Random random, int amount) {
         Fixture urlFixture = FixtureSingleton.getInstance().getFixture(FixtureType.URL);
@@ -37,6 +46,9 @@ public class HistoryGenerator implements DataGenerator {
         }
     }
 
+    /**
+     * Clears the browser history
+     */
     @Override
     public void reset() {
         Browser.clearHistory(cr);

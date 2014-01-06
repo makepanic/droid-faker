@@ -21,6 +21,10 @@ public class CallTask extends Task implements ReflectedTask {
     public CallTask() {
     }
 
+    /**
+     * Initializes the number, cachedName, cachedNumberLabel, date and duration field
+     * @param map map of parameters that are available from the json object
+     */
     @Override
     public void init(HashMap<String, Object> map) {
         this.number = (String) map.get("number");
@@ -30,6 +34,10 @@ public class CallTask extends Task implements ReflectedTask {
         this.duration = Long.valueOf((String) map.get("duration"));
     }
 
+    /**
+     * Calls the {@link de.rndm.droidFaker.generators.CallsGenerator} with object parameters
+     * @param context useful object to access contentResolver or applicationContext
+     */
     @Override
     public void run(Context context) {
         CallsGenerator callsGenerator = new CallsGenerator(context.getContentResolver());

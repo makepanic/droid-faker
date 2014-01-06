@@ -3,7 +3,7 @@ package de.rndm.droidFaker.model;
 import java.io.File;
 
 /**
- * User: rndm
+ * Class uses a file path and stores a {@link java.io.File} representing the path
  */
 public class FilePath {
     private File file;

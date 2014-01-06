@@ -40,6 +40,10 @@ public class ContactTask extends Task implements ReflectedTask {
         this.nickname = (String) map.get("nickname");
     }
 
+    /**
+     * Calls the {@link de.rndm.droidFaker.generators.ContactGenerator} with object parameters
+     * @param context useful object to access contentResolver or applicationContext
+     */
     @Override
     public void run(Context context) {
         ContactGenerator contactGenerator = new ContactGenerator(context.getContentResolver());

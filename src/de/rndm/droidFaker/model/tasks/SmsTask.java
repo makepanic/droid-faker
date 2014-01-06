@@ -24,6 +24,10 @@ public class SmsTask extends Task implements ReflectedTask {
         this.from = (String) map.get("from");
     }
 
+    /**
+     * Calls the {@link de.rndm.droidFaker.generators.SmsGenerator} with object parameters
+     * @param context useful object to access contentResolver or applicationContext
+     */
     @Override
     public void run(Context context) {
         SmsGenerator smsGenerator = new SmsGenerator(context.getContentResolver());

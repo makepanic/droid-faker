@@ -10,6 +10,10 @@ import android.content.Context;
 public class Task {
     private String type;
 
+    /**
+     * Should call a generator
+     * @param context useful object to access contentResolver or applicationContext
+     */
     public void run(Context context){
 
     }

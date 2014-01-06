@@ -26,6 +26,11 @@ public class SmsGenerator implements DataGenerator {
         this.cr = cr;
     }
 
+    /**
+     * Inserts a new SMS to the inbox
+     * @param address sms sender number
+     * @param body sms text
+     */
     public void insert(String address, String body){
         ContentValues values = new ContentValues();
         values.put("address", address);
@@ -34,6 +39,11 @@ public class SmsGenerator implements DataGenerator {
 
     }
 
+    /**
+     * Generates a given amount of random SMS
+     * @param random Random object
+     * @param amount number of objects to insert
+     */
     @Override
     public void generate(Random random, int amount) {
         Fixture nameFixture = FixtureSingleton.getInstance().getFixture(FixtureType.NAME);
@@ -44,6 +54,9 @@ public class SmsGenerator implements DataGenerator {
         }
     }
 
+    /**
+     * Deletes all items in the SMS inbox
+     */
     @Override
     public void reset() {
         // via http://stackoverflow.com/questions/9443356/how-to-delete-all-sms-from-inbox-programmatically-in-android

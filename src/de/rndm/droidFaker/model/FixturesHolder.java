@@ -10,6 +10,10 @@ import java.util.Iterator;
  * Date: 31.12.13
  * Time: 00:33
 */
+
+/**
+ * Class that holds a map of {@link de.rndm.droidFaker.fixtures.Fixture}
+ */
 public class FixturesHolder {
     private final HashMap<String, Fixture> fixtures = new HashMap<String, Fixture>();
 
@@ -26,6 +30,11 @@ public class FixturesHolder {
         }
     }
 
+    /**
+     * Returns a fixture from the map using the given {@link de.rndm.droidFaker.model.FixtureType} as key
+     * @param what key to look in the map for a fixture
+     * @return found Fixture or null if not found
+     */
     public Fixture getFixture(FixtureType what){
         return fixtures.get(what.toString());
     }

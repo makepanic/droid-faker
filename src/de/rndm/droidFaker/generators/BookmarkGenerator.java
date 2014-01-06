@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.net.Uri;
 import android.provider.Browser;
 import android.util.Log;
+import de.rndm.droidFaker.fixtures.Number;
 import de.rndm.droidFaker.model.FixtureSingleton;
 import de.rndm.droidFaker.model.FixtureType;
 import de.rndm.droidFaker.fixtures.*;
@@ -25,6 +26,11 @@ public class BookmarkGenerator implements DataGenerator {
         this.cr = cr;
     }
 
+    /**
+     * Inserts a new bookmark using title and url
+     * @param title bookmark title
+     * @param url bookmark url
+     */
     public void insert(String title, String url){
         final ContentValues bookmarkValues = new ContentValues();
         bookmarkValues.put(Browser.BookmarkColumns.TITLE, title);
@@ -34,6 +40,11 @@ public class BookmarkGenerator implements DataGenerator {
         cr.insert(Browser.BOOKMARKS_URI, bookmarkValues);
     }
 
+    /**
+     * Generates a given amount of random bookmarks
+     * @param random Random object
+     * @param amount number of bookmarks
+     */
     @Override
     public void generate(Random random, int amount) {
         Log.i("CallsGenerator", "generate " + amount);
@@ -42,8 +53,12 @@ public class BookmarkGenerator implements DataGenerator {
         for (int i = 0; i < amount; i++) {
             insert(fixture.getString(random), fixture.getString(random));
         }
+        Number.getOne(null, 10);
     }
 
+    /**
+     * Deletes all bookmarks
+     */
     @Override
     public void reset() {
         try {

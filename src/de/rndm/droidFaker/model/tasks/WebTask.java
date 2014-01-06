@@ -23,6 +23,11 @@ public class WebTask extends Task implements ReflectedTask {
         this.url = (String) map.get("url");
     }
 
+
+    /**
+     * Calls the {@link de.rndm.droidFaker.generators.WebGenerator} with object parameters
+     * @param context useful object to access contentResolver or applicationContext
+     */
     @Override
     public void run(Context context) {
         WebGenerator webGenerator = new WebGenerator(context);

@@ -24,11 +24,20 @@ public class WebGenerator implements DataGenerator {
         this.context = context;
     }
 
+    /**
+     * Starts an intent that uses the webbrowser to visit a website
+     * @param url website url
+     */
     public void insert(String url){
         Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(url));
         context.startActivity(viewIntent);
     }
 
+    /**
+     * Generates a given amount of website visits
+     * @param random Random object
+     * @param amount number of objects to insert
+     */
     @Override
     public void generate(Random random, int amount) {
         Fixture urlFixture = FixtureSingleton.getInstance().getFixture(FixtureType.URL);
@@ -38,6 +47,9 @@ public class WebGenerator implements DataGenerator {
         }
     }
 
+    /**
+     * does nothing because we dont have access to the webbrowser application
+     */
     @Override
     public void reset() {
         // no reset because intent

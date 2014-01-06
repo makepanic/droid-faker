@@ -18,12 +18,20 @@ public class BookmarkTask extends Task implements ReflectedTask {
     public BookmarkTask() {
     }
 
+    /**
+     * Initializes the title and url field
+     * @param map map of parameters that are available from the json object
+     */
     @Override
     public void init(HashMap<String, Object> map) {
         this.title = (String) map.get("title");
         this.url = (String) map.get("url");
     }
 
+    /**
+     * Calls the {@link de.rndm.droidFaker.generators.BookmarkGenerator} with object parameters
+     * @param context useful object to access contentResolver or applicationContext
+     */
     @Override
     public void run(Context context) {
         BookmarkGenerator bookmarkGenerator = new BookmarkGenerator(context.getContentResolver());

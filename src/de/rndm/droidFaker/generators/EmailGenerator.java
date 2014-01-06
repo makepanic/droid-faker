@@ -23,6 +23,12 @@ public class EmailGenerator implements DataGenerator {
         this.ctx = ctx;
     }
 
+    /**
+     * starts an intent for the email client with prefilled fields
+     * @param receiver email address
+     * @param subject email subject
+     * @param text email body
+     */
     public void insert(String receiver, String subject, String text){
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
@@ -36,6 +42,11 @@ public class EmailGenerator implements DataGenerator {
         }
     }
 
+    /**
+     * Generates a given amount of email intents
+     * @param random Random object
+     * @param amount number of objects to insert
+     */
     @Override
     public void generate(Random random, int amount) {
         Fixture emailFixture = FixtureSingleton.getInstance().getFixture(FixtureType.EMAIL);
@@ -47,6 +58,9 @@ public class EmailGenerator implements DataGenerator {
         }
     }
 
+    /**
+     * does nothing because we dont have access to emails in an external application
+     */
     @Override
     public void reset() {
         // no reset because intent
