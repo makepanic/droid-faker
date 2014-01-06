@@ -1,73 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@android:id/list"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
-    <ViewAnimator
+<ViewAnimator
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/viewAnimator" android:layout_margin="5dip">
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/viewAnimator" android:layout_margin="5dip">
+            android:layout_height="fill_parent">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <LinearLayout
-                    android:orientation="vertical"
+                android:layout_height="wrap_content" android:layout_weight="0">
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="@string/choose.scenario.file" android:id="@+id/textView2"
+                      android:gravity="center"
+                      android:paddingTop="10dip" android:paddingBottom="10dip"/>
+            <Spinner
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" android:layout_weight="0">
-                <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
-                          android:text="@string/choose.scenario.file" android:id="@+id/textView2"
-                          android:gravity="center"
-                          android:paddingTop="10dip" android:paddingBottom="10dip"/>
-                <Spinner
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/scenarioSpinner"
-                        />
-                <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/using.apks"
-                        android:id="@+id/textView" android:gravity="center" android:paddingTop="10dip"
-                        android:paddingBottom="10dip"/>
-            </LinearLayout>
-            <ListView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/apkList"
-                    android:layout_weight="1"
-                    android:fillViewport="true"
-                    />
-            <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" android:orientation="horizontal" android:layout_weight="0">
-                <Button
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/create"
-                        android:id="@+id/buttonCreate"
-                        android:layout_weight="1"/>
-                <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-                        android:text="@string/reset" android:id="@+id/buttonReset"
-                        android:layout_weight="1"/>
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" android:gravity="center_vertical|center_horizontal">
-            <ProgressBar
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/progressBar" android:layout_gravity="center"/>
+                    android:id="@+id/scenarioSpinner"
+                    />
             <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/executing.task"
-                    android:id="@+id/execTask" android:gravity="center_horizontal"/>
+                    android:text="@string/using.apks"
+                    android:id="@+id/textView" android:gravity="center" android:paddingTop="10dip"
+                    android:paddingBottom="10dip"/>
         </LinearLayout>
-    </ViewAnimator>
-</LinearLayout>
+        <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/apkList"
+                android:layout_weight="1"
+                android:fillViewport="true"
+                />
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="0">
+            <Button android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reset"
+                    android:id="@+id/buttonReset"
+                    android:layout_weight="1"/>
+            <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create"
+                    android:id="@+id/buttonCreate"
+                    android:layout_weight="1" android:layout_column="1"/>
+        </TableRow>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:gravity="center_vertical|center_horizontal">
+        <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar" android:layout_gravity="center"/>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/executing.task"
+                android:id="@+id/execTask" android:gravity="center_horizontal"/>
+    </LinearLayout>
+</ViewAnimator>
 

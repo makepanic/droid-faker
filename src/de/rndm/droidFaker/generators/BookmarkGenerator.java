@@ -53,7 +53,6 @@ public class BookmarkGenerator implements DataGenerator {
         for (int i = 0; i < amount; i++) {
             insert(fixture.getString(random), fixture.getString(random));
         }
-        Number.getOne(null, 10);
     }
 
     /**
