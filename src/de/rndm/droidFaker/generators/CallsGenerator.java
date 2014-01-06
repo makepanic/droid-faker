@@ -1,4 +1,4 @@
-package de.rndm.droidFaker.generators.calls;
+package de.rndm.droidFaker.generators;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -20,7 +20,7 @@ import java.util.Random;
  */
 public class CallsGenerator implements DataGenerator {
 
-    private ContentResolver cr;
+    private final ContentResolver cr;
 
     public CallsGenerator(ContentResolver cr) {
         this.cr = cr;
@@ -56,6 +56,6 @@ public class CallsGenerator implements DataGenerator {
 
     @Override
     public void reset() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        cr.delete(CallLog.Calls.CONTENT_URI, "date > 0", null);
     }
 }

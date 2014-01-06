@@ -1,9 +1,7 @@
 package de.rndm.droidFaker.model.tasks;
 
 import android.content.Context;
-import de.rndm.droidFaker.fixtures.StringFixture;
-import de.rndm.droidFaker.generators.calls.CallsGenerator;
-import de.rndm.droidFaker.generators.email.EmailGenerator;
+import de.rndm.droidFaker.generators.EmailGenerator;
 import de.rndm.droidFaker.model.ReflectedTask;
 
 import java.util.HashMap;

@@ -3,7 +3,6 @@ package de.rndm.droidFaker.generators;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 import java.io.File;
 
@@ -11,7 +10,7 @@ import java.io.File;
  * User: rndm
  */
 public class ApkInstaller {
-    private Context context;
+    private final Context context;
 
     public ApkInstaller(Context context) {
         this.context = context;

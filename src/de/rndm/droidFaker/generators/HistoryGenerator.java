@@ -1,4 +1,4 @@
-package de.rndm.droidFaker.generators.history;
+package de.rndm.droidFaker.generators;
 
 import android.content.ContentResolver;
 import android.provider.Browser;
@@ -18,7 +18,7 @@ import java.util.Random;
  */
 public class HistoryGenerator implements DataGenerator {
 
-    private ContentResolver cr;
+    private final ContentResolver cr;
 
     public HistoryGenerator(ContentResolver cr) {
         this.cr = cr;

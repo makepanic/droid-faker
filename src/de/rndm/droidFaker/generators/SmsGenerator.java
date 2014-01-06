@@ -1,4 +1,4 @@
-package de.rndm.droidFaker.generators.sms;
+package de.rndm.droidFaker.generators;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;

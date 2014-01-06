@@ -1,4 +1,4 @@
-package de.rndm.droidFaker.generators.web;
+package de.rndm.droidFaker.generators;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +40,6 @@ public class WebGenerator implements DataGenerator {
 
     @Override
     public void reset() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        // no reset because intent
     }
 }

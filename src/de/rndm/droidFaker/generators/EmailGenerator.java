@@ -1,4 +1,4 @@
-package de.rndm.droidFaker.generators.email;
+package de.rndm.droidFaker.generators;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import java.util.Random;
 public class EmailGenerator implements DataGenerator {
     private static final String PREF_EMAIL = "email.count";
 
-    private Context ctx;
+    private final Context ctx;
 
     public EmailGenerator(Context ctx) {
         this.ctx = ctx;
@@ -49,6 +49,6 @@ public class EmailGenerator implements DataGenerator {
 
     @Override
     public void reset() {
-
+        // no reset because intent
     }
 }

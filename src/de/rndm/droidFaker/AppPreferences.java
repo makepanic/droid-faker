@@ -25,8 +25,8 @@ public class AppPreferences {
 
     private static final String APP_SHARED_PREFS = "de.rndm.droidFaker";
 
-    private SharedPreferences appSharedPrefs;
-    private SharedPreferences.Editor prefsEditor;
+    private final SharedPreferences appSharedPrefs;
+    private final SharedPreferences.Editor prefsEditor;
 
     public AppPreferences(Context context)
     {
@@ -34,7 +34,7 @@ public class AppPreferences {
         this.prefsEditor = appSharedPrefs.edit();
     }
 
-    public String getString(String key, String defValue){
+    String getString(String key, String defValue){
         String value = "";
         if(key != null && !key.equals("")){
             value = appSharedPrefs.getString(key, "");

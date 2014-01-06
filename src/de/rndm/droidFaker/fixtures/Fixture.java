@@ -6,7 +6,7 @@ import java.util.Random;
  * User: rndm
  */
 public class Fixture {
-    private String[] fixtures;
+    private final String[] fixtures;
 
     public String getString(Random random){
         return fixtures[random.nextInt(fixtures.length)];

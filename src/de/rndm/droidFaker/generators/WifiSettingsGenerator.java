@@ -1,16 +1,18 @@
-package de.rndm.droidFaker.generators.wifi;
+package de.rndm.droidFaker.generators;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.util.Log;
+import android.widget.Toast;
 import de.rndm.droidFaker.model.FixtureSingleton;
 import de.rndm.droidFaker.model.FixtureType;
 import de.rndm.droidFaker.fixtures.*;
 import de.rndm.droidFaker.fixtures.Number;
 import de.rndm.droidFaker.generators.DataGenerator;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -48,9 +50,8 @@ public class WifiSettingsGenerator implements DataGenerator {
         wc.wepKeys[0] = "\"" + pass + "\""; //This is the WEP Password
         wc.wepTxKeyIndex = 0;
 
-        int res = wifi.addNetwork(wc);
-        boolean es = wifi.saveConfiguration();
-
+        wifi.addNetwork(wc);
+        wifi.saveConfiguration();
     }
 
     @Override
@@ -67,6 +68,14 @@ public class WifiSettingsGenerator implements DataGenerator {
 
     @Override
     public void reset() {
-
+        WifiManager wifi = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
+        List<WifiConfiguration> configuredNetworks = wifi.getConfiguredNetworks();
+        if (configuredNetworks != null) {
+            for (WifiConfiguration configuredNetwork : configuredNetworks) {
+                wifi.removeNetwork(configuredNetwork.networkId);
+            }
+        } else {
+            Log.i("resetNetworks", "cannot reset networks if wifi is turned off");
+        }
     }
 }

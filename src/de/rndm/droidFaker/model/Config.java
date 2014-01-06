@@ -1,7 +1,5 @@
 package de.rndm.droidFaker.model;
 
-import de.rndm.droidFaker.fixtures.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 

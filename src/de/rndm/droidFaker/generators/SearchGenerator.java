@@ -1,4 +1,4 @@
-package de.rndm.droidFaker.generators.search;
+package de.rndm.droidFaker.generators;
 
 import android.content.ContentResolver;
 import android.provider.Browser;

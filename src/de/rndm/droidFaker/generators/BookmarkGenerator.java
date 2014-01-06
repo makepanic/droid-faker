@@ -1,4 +1,4 @@
-package de.rndm.droidFaker.generators.bookmark;
+package de.rndm.droidFaker.generators;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -19,21 +19,19 @@ import java.util.Random;
  */
 public class BookmarkGenerator implements DataGenerator {
 
-    private ContentResolver cr;
+    private final ContentResolver cr;
 
     public BookmarkGenerator(ContentResolver cr) {
         this.cr = cr;
     }
 
     public void insert(String title, String url){
-        Fixture fixture = FixtureSingleton.getInstance().getFixture(FixtureType.URL);
-
         final ContentValues bookmarkValues = new ContentValues();
         bookmarkValues.put(Browser.BookmarkColumns.TITLE, title);
         bookmarkValues.put(Browser.BookmarkColumns.URL, url);
         bookmarkValues.put(Browser.BookmarkColumns.BOOKMARK, 1);
 
-        final Uri newBookmark = cr.insert(Browser.BOOKMARKS_URI, bookmarkValues);
+        cr.insert(Browser.BOOKMARKS_URI, bookmarkValues);
     }
 
     @Override

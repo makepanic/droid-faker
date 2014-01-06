@@ -9,15 +9,15 @@ import java.util.Random;
  */
 public class Text {
 
-    public static String alphabet = "qwertzuiopasdfghjklyxcvbnm ";
+    private static String ALPHABET = "qwertzuiopasdfghjklyxcvbnm ";
 
     public static String getText(Random random, int maxLength){
         String result = "";
-        int alphabetLength = alphabet.length();
+        int alphabetLength = ALPHABET.length();
         int max = random.nextInt(maxLength);
 
         for(int i = 1; i < max + 1; i++) {
-            result += alphabet.charAt(random.nextInt(alphabetLength));
+            result += ALPHABET.charAt(random.nextInt(alphabetLength));
         }
 
         return result;

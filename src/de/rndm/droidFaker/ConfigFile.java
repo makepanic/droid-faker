@@ -2,7 +2,6 @@ package de.rndm.droidFaker;
 
 import android.util.Log;
 import com.google.gson.Gson;
-import de.rndm.droidFaker.generators.web.WebGenerator;
 import de.rndm.droidFaker.model.*;
 
 import java.io.BufferedReader;
@@ -12,8 +11,6 @@ import java.io.FileReader;
 public class ConfigFile {
     private String path;
     private Config cfg;
-    private FixturesHolder fixturesHolder;
-    private TaskHolder taskHolder;
 
     public ConfigFile(String path) {
         this.path = path;
@@ -51,14 +48,7 @@ public class ConfigFile {
         appPreferences.set(AppPreferences.COUNT_EMAIL, cfg.getEmail());
         appPreferences.set(AppPreferences.COUNT_WEB, cfg.getWebsites());
 
-        fixturesHolder = cfg.buildFixturesHolder();
-        taskHolder = cfg.buildTaskHolder();
-
-        FixtureSingleton.init(fixturesHolder);
-        TasksSingleton.init(taskHolder);
-    }
-
-    public TaskHolder getTaskHolder() {
-        return taskHolder;
+        FixtureSingleton.init(cfg.buildFixturesHolder());
+        TaskHolderSingleton.init(cfg.buildTaskHolder());
     }
 }

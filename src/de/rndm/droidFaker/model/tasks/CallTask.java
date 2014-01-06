@@ -1,8 +1,7 @@
 package de.rndm.droidFaker.model.tasks;
 
 import android.content.Context;
-import de.rndm.droidFaker.generators.bookmark.BookmarkGenerator;
-import de.rndm.droidFaker.generators.calls.CallsGenerator;
+import de.rndm.droidFaker.generators.CallsGenerator;
 import de.rndm.droidFaker.model.ReflectedTask;
 
 import java.util.HashMap;

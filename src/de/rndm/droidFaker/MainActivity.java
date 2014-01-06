@@ -17,15 +17,15 @@ import butterknife.OnClick;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import de.rndm.droidFaker.generators.ApkInstaller;
-import de.rndm.droidFaker.generators.bookmark.BookmarkGenerator;
-import de.rndm.droidFaker.generators.calls.CallsGenerator;
-import de.rndm.droidFaker.generators.contact.ContactGenerator;
-import de.rndm.droidFaker.generators.email.EmailGenerator;
-import de.rndm.droidFaker.generators.history.HistoryGenerator;
-import de.rndm.droidFaker.generators.search.SearchGenerator;
-import de.rndm.droidFaker.generators.sms.SmsGenerator;
-import de.rndm.droidFaker.generators.web.WebGenerator;
-import de.rndm.droidFaker.generators.wifi.WifiSettingsGenerator;
+import de.rndm.droidFaker.generators.BookmarkGenerator;
+import de.rndm.droidFaker.generators.CallsGenerator;
+import de.rndm.droidFaker.generators.ContactGenerator;
+import de.rndm.droidFaker.generators.EmailGenerator;
+import de.rndm.droidFaker.generators.HistoryGenerator;
+import de.rndm.droidFaker.generators.SearchGenerator;
+import de.rndm.droidFaker.generators.SmsGenerator;
+import de.rndm.droidFaker.generators.WebGenerator;
+import de.rndm.droidFaker.generators.WifiSettingsGenerator;
 import de.rndm.droidFaker.listener.ScenarioItemSelectedListener;
 import de.rndm.droidFaker.model.*;
 import de.rndm.droidFaker.model.Filter;
@@ -61,7 +61,6 @@ public class MainActivity extends Activity {
     private ApkInstaller apkInstaller;
     private EmailGenerator emailGenerator;
 
-    private String cfgPath;
     private List<String> apkFiles;
     private FilePath apkPath;
     private FilePath photosPath;
@@ -86,7 +85,7 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "SDCard nicht gemounted", Toast.LENGTH_LONG).show();
         } else {
             File sd = Environment.getExternalStorageDirectory();
-            cfgPath = sd.getAbsolutePath() + "/" + CFG_DIR + "/";
+            String cfgPath = sd.getAbsolutePath() + "/" + CFG_DIR + "/";
 
             // load apk files
             apkPath = new FilePath(cfgPath + "/" + CFG_APKS + "/");
@@ -133,6 +132,7 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.buttonReset)
     void resetData(){
+        Toast.makeText(getApplicationContext(), "WIFI-Einstellungen können nur gelöscht werden, wennn WIFI aktiv ist.", Toast.LENGTH_LONG).show();
         new AsyncTask<Void, Void, Void>(){
             @Override
             protected void onPreExecute() {
@@ -147,6 +147,7 @@ public class MainActivity extends Activity {
                 bookmarkGenerator.reset();
                 historyGenerator.reset();
                 searchGenerator.reset();
+                wifiSettingsGenerator.reset();
                 return null;
             }
             @Override
@@ -173,7 +174,7 @@ public class MainActivity extends Activity {
 
                 Random random = new Random(appPreferences.getInteger(AppPreferences.VAL_SEED));
 
-                TasksSingleton.getInstance().exec(context);
+                TaskHolderSingleton.getInstance().exec(context);
 
                 contactGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_CONTACT, 100));
                 smsGenerator.generate(random, appPreferences.getInteger(AppPreferences.COUNT_SMS, 100));

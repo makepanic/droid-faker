@@ -2,14 +2,9 @@ package de.rndm.droidFaker;
 
 import android.os.Environment;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 import de.rndm.droidFaker.model.FilePath;
-import de.rndm.droidFaker.model.Filter;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

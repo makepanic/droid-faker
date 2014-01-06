@@ -5,10 +5,10 @@ package de.rndm.droidFaker.model;
  * Date: 04.01.14
  * Time: 23:00
  */
-public class TasksSingleton {
+public class TaskHolderSingleton {
     private static TaskHolder ourInstance = null;
 
-    private TasksSingleton(TaskHolder taskHolder) {
+    private TaskHolderSingleton(TaskHolder taskHolder) {
         ourInstance = taskHolder;
     }
 

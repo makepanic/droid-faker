@@ -1,4 +1,4 @@
-package de.rndm.droidFaker.generators.contact;
+package de.rndm.droidFaker.generators;
 
 import android.content.*;
 import android.database.Cursor;
@@ -15,7 +15,6 @@ import de.rndm.droidFaker.model.FixtureSingleton;
 import de.rndm.droidFaker.model.FixtureType;
 import de.rndm.droidFaker.fixtures.*;
 import de.rndm.droidFaker.fixtures.Number;
-import de.rndm.droidFaker.generators.DataGenerator;
 import de.rndm.droidFaker.model.FixturesHolder;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ import java.util.Random;
  */
 public class ContactGenerator implements DataGenerator {
 
-    private ContentResolver cr;
+    private final ContentResolver cr;
 
     public ContactGenerator(ContentResolver cr) {
         this.cr = cr;
@@ -134,8 +133,7 @@ public class ContactGenerator implements DataGenerator {
                 .build());
 
         try {
-            ContentProviderResult[] res = cr.applyBatch(
-                    ContactsContract.AUTHORITY, ops);
+            cr.applyBatch(ContactsContract.AUTHORITY, ops);
         } catch (RemoteException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (OperationApplicationException e) {

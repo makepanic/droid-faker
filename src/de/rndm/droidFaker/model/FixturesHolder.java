@@ -11,7 +11,7 @@ import java.util.Iterator;
  * Time: 00:33
 */
 public class FixturesHolder {
-    private HashMap<String, Fixture> fixtures = new HashMap<String, Fixture>();
+    private final HashMap<String, Fixture> fixtures = new HashMap<String, Fixture>();
 
     public FixturesHolder(HashMap<String, String[]> fixtures){
         // loop through fixture map

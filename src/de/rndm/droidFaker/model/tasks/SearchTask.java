@@ -1,9 +1,7 @@
 package de.rndm.droidFaker.model.tasks;
 
 import android.content.Context;
-import de.rndm.droidFaker.generators.history.HistoryGenerator;
-import de.rndm.droidFaker.generators.search.SearchGenerator;
-import de.rndm.droidFaker.generators.web.WebGenerator;
+import de.rndm.droidFaker.generators.WebGenerator;
 import de.rndm.droidFaker.model.ReflectedTask;
 
 import java.util.HashMap;

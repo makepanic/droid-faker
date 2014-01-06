@@ -1,6 +1,5 @@
 package de.rndm.droidFaker.model;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import de.rndm.droidFaker.model.tasks.Task;
 

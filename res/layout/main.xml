@@ -18,7 +18,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" android:layout_weight="0">
                 <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
-                          android:text="Choose scenario file" android:id="@+id/textView2" android:gravity="center"
+                          android:text="@string/choose.scenario.file" android:id="@+id/textView2"
+                          android:gravity="center"
                           android:paddingTop="10dip" android:paddingBottom="10dip"/>
                 <Spinner
                         android:layout_width="fill_parent"
@@ -28,19 +29,17 @@
                 <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="Using apks"
+                        android:text="@string/using.apks"
                         android:id="@+id/textView" android:gravity="center" android:paddingTop="10dip"
                         android:paddingBottom="10dip"/>
             </LinearLayout>
-            <ScrollView
+            <ListView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:id="@+id/scrollView" android:layout_weight="1" android:fillViewport="true">
-                <ListView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:id="@+id/apkList"/>
-            </ScrollView>
+                    android:id="@+id/apkList"
+                    android:layout_weight="1"
+                    android:fillViewport="true"
+                    />
             <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" android:orientation="horizontal" android:layout_weight="0">
@@ -48,9 +47,10 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/create"
-                        android:id="@+id/buttonCreate" android:layout_column="0" android:layout_weight="1"/>
+                        android:id="@+id/buttonCreate"
+                        android:layout_weight="1"/>
                 <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-                        android:text="@string/reset" android:id="@+id/buttonReset" android:layout_column="0"
+                        android:text="@string/reset" android:id="@+id/buttonReset"
                         android:layout_weight="1"/>
             </LinearLayout>
         </LinearLayout>
